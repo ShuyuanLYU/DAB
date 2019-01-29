@@ -14,6 +14,9 @@ public class Distrib {
     public Banque BanqueDeRattachement;
 
     private Carte carteInseree;
+    
+    public Distrib() {
+    }
 
     public void insererCarte(String noCarte, String code, int nbEssaisRestants) {
     }
