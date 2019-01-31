@@ -1,20 +1,30 @@
 package dab;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class CarteClient {
 
     private String noCarte;
     private Client client;
     
-    public CarteClient(String NoCarte) {
+    public CarteClient(String NoCarte, Client client) {
+    	this.noCarte = NoCarte;
+    	this.client = client;
+    }
+    
+    public String getNoCarte() {
+    	// System.out.println("[CarteClient] - getNoCarte -> " + noCarte);
+    	return noCarte;
     }
 
     public boolean verifierNumeroCarte(String noCarte) {
-        throw new NotImplementedException();
+        return noCarte.equals(noCarte);
     }
 
     public Client recupereClient() {
-        throw new NotImplementedException();
+    	// System.out.println("CarteClient - recupereClient -> " + client.getNomClient());
+        return client;
+    }
+    // pour test
+    public String toString() {
+    	return "NoCarte : " + noCarte + " client : " + client.getNomClient();
     }
 }

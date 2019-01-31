@@ -20,7 +20,7 @@ public class Compte {
     }
 
 	public String afficheCompte() {
-		return "noCompte : " + noCompte + "\n" + "Solde : " + Solde + "\n" + "plafondRetrait : " + "\n";
+		return "No Compte : " + noCompte + "\n" + "Solde : " + Solde + "\n" + "plafondRetrait : ";
 	}
 
 	public Compte recupereCompte() {
@@ -28,11 +28,17 @@ public class Compte {
 	}
 
 	public String afficheCompteVirement() {
-		return null;
+		return "No Compte : " + noCompte + "\n" + "Solde : " + Solde;
 	}
 
 	public boolean verifierVirementPossible(double somme, Date date) {
-		return true;
+		return Solde >= somme;
 	}
+	//----
+	public Compte(float Solde, String noCompte) {
+		this.Solde = Solde;
+		this.noCompte = noCompte;
+		//this.plafondRetrait = plafondRetrait;
+    }
 
 }

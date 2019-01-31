@@ -18,7 +18,7 @@ public class OperationBancaire {
 	}
 
 	public String afficheOB() {
-		return "NatureOperation : " + nature + "\n" + "Montant : " + Montant + "\n" + "dateOperation : "
+		return "Nature Operation : " + nature + "\n" + "Montant : " + Montant + "\n" + "Date Operation : "
 				+ dateOperation.toString() + "\n";
 	}
 
