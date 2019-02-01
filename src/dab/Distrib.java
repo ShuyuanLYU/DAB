@@ -105,13 +105,36 @@ public class Distrib {
 		System.out.println(
 				"Virement lancé, \nLe numéro de la carte insérée est " + numeroCarteInseree + ".");
 
-		/*Object[] listeComptes = banqueDeRattachement
+		Object[] listeComptes = banqueDeRattachement
 				.recupereComptesVirement(numeroCarteInseree);
 
-		if (listeComptes.size() > 0)
-			afficheListeComptes(listeComptes);
+		List<Compte> listeComptesPerso = (List<Compte>) listeComptes[0];
+		List<CompteDestinataire> listeComptesDestinataires = (List<CompteDestinataire>) listeComptes[1];
+		if (listeComptesPerso != null && listeComptesDestinataires != null) {
+			int indice = 1;
+			System.out.println("-------Liste Comptes �metteurs-------");
+			for(Compte comptePerso : listeComptesPerso) {
+				System.out.print(indice++ + ". ");
+				System.out.println(comptePerso.afficheCompteVirement());
+			}
+				
+			System.out.println("-------------------------------------");
+			System.out.println("-----Liste Comptes destinataires-----");
+			for(Compte comptePerso : listeComptesPerso) {
+				System.out.print(indice++ + ". ");
+				System.out.println(comptePerso.afficheCompteVirement());
+			}
+			for(CompteDestinataire compteDestinataire : listeComptesDestinataires) {
+				System.out.print(indice++ + ". ");
+				System.out.println(compteDestinataire.afficheCompte());
+			}
+			System.out.println("-------------------------------------");
+			System.out.println(indice + ". Retour au menu");
+			
+		}
+			
 		else
-			System.out.println("Aucun compte n'a été trouvé."); // Ne devrait jamais se produire*/
+			System.out.println("Aucun compte n'a été trouvé."); // Ne devrait jamais se produire
 	}
 
 	private void afficheListeComptesVirement(List<Compte> comptesPerso, List<Compte> comptesDestinataires) {

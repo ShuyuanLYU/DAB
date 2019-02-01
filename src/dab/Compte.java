@@ -10,6 +10,7 @@ public class Compte {
 	private float Solde;
 	private String numeroCompte;
 	private float plafondRetrait;
+	private float soldeMinimum;
 	private List<Client> client = new ArrayList<>();
 	private List<OperationBancaire> listOB = new ArrayList<>();
 
@@ -17,10 +18,11 @@ public class Compte {
 		return numeroCompte;
 	}
 	
-	public Compte(float Solde, String numeroCompte, float plafondRetrait) {
+	public Compte(float Solde, String numeroCompte, float plafondRetrait, float soldeMinimum) {
 		this.Solde = Solde;
 		this.numeroCompte = numeroCompte;
 		this.plafondRetrait = plafondRetrait;
+		this.soldeMinimum = soldeMinimum;
     }
 
 	public String afficheCompte() {
@@ -29,7 +31,7 @@ public class Compte {
 
 	public String afficheDetailsCompte() {
 		return "Numéro compte : " + numeroCompte + "\n" + "Solde : " + Solde + "\n" +
-				"Plafond de retrait : " + plafondRetrait;
+				"Plafond de retrait : " + plafondRetrait + "\n" + "Solde minimum : " + soldeMinimum;
 	}
 
 	public Compte recupereCompte() {
@@ -37,7 +39,7 @@ public class Compte {
 	}
 
 	public String afficheCompteVirement() {
-		return "Numéro compte : " + numeroCompte + "\n" + "Solde : " + Solde;
+		return "Numéro compte : " + numeroCompte + "  Solde : " + Solde;
 	}
 
 	public boolean verifierVirementPossible(double somme, Date date) {

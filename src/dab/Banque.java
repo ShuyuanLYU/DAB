@@ -29,8 +29,14 @@ public class Banque {
 		return null;
 	}
 
-	public ComptesVirement recupereComptesVirement(Client compteClient) {
-		return compteClient.recupereComptesVirement();
+	public Object[] recupereComptesVirement(String numeroCarteInseree) {
+		for (CarteClient carteClient : listeCartesClients) {
+			if (carteClient.verifierNumeroCarte(numeroCarteInseree)) {
+				Client clientTrouve = carteClient.recupereClient();
+				return clientTrouve.recupereComptesVirement();
+			}
+		}
+		return new Object[2];
 	}
 
 	public boolean effectueVirement(Compte compteEmission, Compte compteDestinataire, double somme, Date date,
@@ -38,15 +44,13 @@ public class Banque {
 		return compteEmission.verifierVirementPossible(somme, date);
 	}
 
-	public List<Compte> recupereComptesConsultation(String noCarte) {
+	public List<Compte> recupereComptesConsultation(String numeroCarteInseree) {
 		for (CarteClient carteClient : listeCartesClients) {
-			if (carteClient.verifierNumeroCarte(noCarte)) {
+			if (carteClient.verifierNumeroCarte(numeroCarteInseree)) {
 				Client clientTrouve = carteClient.recupereClient(); // si on le trouve
-
 				return clientTrouve.recupereComptes(); // on revoie la liste des comptes
 			}
 		}
-
 		return new ArrayList<>(); // sinon, on revoie une liste vide
 	}
 

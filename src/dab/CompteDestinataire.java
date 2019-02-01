@@ -15,7 +15,7 @@ public class CompteDestinataire {
     }
 
     public String afficheCompte() {
-        return "Iban : " + iban + "\n" + "BIC : " + bic;
+        return "Iban : " + iban + "  BIC : " + bic;
     }
 
 }

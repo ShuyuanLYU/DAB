@@ -26,14 +26,15 @@ public class Client {
 		return listeComptes;
 	}
 
-	public ComptesVirement recupereComptesVirement() {
+	public Object[] recupereComptesVirement() {
 		if(listeComptes == null)
 			listeComptes = new ArrayList<>();
 
 		if(listeComptesDestinataires == null)
 			listeComptesDestinataires = new ArrayList<>();
-
-		return new ComptesVirement(listeComptes, listeComptesDestinataires);
+		
+		Object[] comptesAssocies = {listeComptes, listeComptesDestinataires};
+		return comptesAssocies;
 	}
 
 	// ---- pour test
