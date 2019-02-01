@@ -1,6 +1,5 @@
 package dab;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -11,13 +10,9 @@ public class Distrib {
 	private int nbBillets50;
 	private int nbBillets100;
 
-	public Banque BanqueDeRattachement;
+	public Banque banqueDeRattachement;
 
-	private Carte carteInseree; // je pense on dois ignore cette classe ptetre
-
-	public Distrib(Banque BanqueDeRattachement) {
-		this.BanqueDeRattachement = BanqueDeRattachement;
-	}
+	private String numeroCarteInseree; // je pense on dois ignore cette classe ptetre
 
 	public void insererCarte(String noCarte, String code, int nbEssaisRestants) {
 	}
@@ -29,31 +24,65 @@ public class Distrib {
 	public void choisirOperation(int noOp) {
 	}
 
-	// private void consultation(Client compteClient) { <----version origine
-	private void consultation(Carte carteInseree_auth) {
+	private void choixConsultation() {
 		System.out.println(
-				"Consultation lancée, \nLe numéro de la carte insérée est " + carteInseree_auth.getNoCarte() + ".");
+				"Consultation lancée, \nLe numéro de la carte insérée est " + numeroCarteInseree + ".");
 
-		List<Compte> list_compte_consultation = BanqueDeRattachement
-				.recupereComptesConsultation(carteInseree_auth.getNoCarte());
+		List<Compte> listeComptes = banqueDeRattachement
+				.recupereComptesConsultation(numeroCarteInseree);
 
-		if (list_compte_consultation.size() > 0)
-			afficheListeComptes(list_compte_consultation);
+		if (listeComptes.size() > 0)
+			afficheListeComptes(listeComptes);
 		else
-			System.out.println("Excusez-nous, le compte n'a pas été trouvé");
-		// j'ai pas fini je pense...
+			System.out.println("Aucun compte n'a été trouvé."); // Ne devrait jamais se produire
 	}
 
 	private void afficheListeComptes(List<Compte> listeComptes) {
-		System.out.println("----- List Compte -----");
+		System.out.println("----- Liste des comptes -----");
+
 		int indice = 1;
 
-		for (Compte p : listeComptes) {
-			System.out.println("       -" + indice++ + "-");
-			System.out.println(p.afficheCompte() + "\n");
+		for (Compte compte : listeComptes) {
+			System.out.println("       -Compte " + indice++ + "-");
+			System.out.println(compte.afficheCompte());
 		}
 
-		System.out.println("--------- End ---------");
+		System.out.println("-------- Fin de liste ---------");
+
+		afficheMenuDetailsCompte(listeComptes);
+		int choix = getChoixDetailsCompte(listeComptes);
+		traiteChoixDetailsCompte(listeComptes, choix);
+	}
+
+	private int getChoixDetailsCompte(List<Compte> listeComptes) {
+		System.out.print("Tapez votre choix : ");
+		Scanner input = new Scanner(System.in);
+		int choix = input.nextInt();
+
+		while (choix < 1 || choix > listeComptes.size() + 1) {
+			System.out.print("Tapez votre choix entre " + 1 + " et " + listeComptes.size() + 1 + " svp : ");
+			choix = input.nextInt();
+		}
+
+		return choix;
+	}
+
+	private void traiteChoixDetailsCompte(List<Compte> listeComptes, int choix) {
+		if(choix <= listeComptes.size()) {
+			System.out.println("------- Détails du compte ----------");
+			System.out.println(listeComptes.get(choix - 1).afficheDetailsCompte());
+			System.out.println("-------------------------------------");
+		}
+	}
+
+	private void afficheMenuDetailsCompte(List<Compte> listeComptes) {
+		int indice = 1;
+		for(Compte compte : listeComptes) {
+			System.out.println(indice++ + ". Voir détails de : " + compte.getNumeroCompte() );
+		}
+
+		System.out.println(indice + ". Retour au menu");
+		System.out.println("-----------------------");
 	}
 
 	private void choisirCompte(Compte compte) {
@@ -72,8 +101,17 @@ public class Distrib {
 		// TO DO
 	}
 
-	private List<Compte> choixVirement(Client compteClient, List<Compte> comptesDestinataires) {
-		return null;
+	private void choixVirement() {
+		System.out.println(
+				"Virement lancé, \nLe numéro de la carte insérée est " + numeroCarteInseree + ".");
+
+		/*Object[] listeComptes = banqueDeRattachement
+				.recupereComptesVirement(numeroCarteInseree);
+
+		if (listeComptes.size() > 0)
+			afficheListeComptes(listeComptes);
+		else
+			System.out.println("Aucun compte n'a été trouvé."); // Ne devrait jamais se produire*/
 	}
 
 	private void afficheListeComptesVirement(List<Compte> comptesPerso, List<Compte> comptesDestinataires) {
@@ -85,19 +123,19 @@ public class Distrib {
 		return true;
 	}
 
-	// ---------------------------------------------- méthodes créées manuelles
-	public Distrib(Banque BanqueDeRattachement, Carte carteInseree) {
-		this.BanqueDeRattachement = BanqueDeRattachement;
-		this.carteInseree = carteInseree;
+	// ---- méthodes créées manuellement
+	public Distrib(Banque banqueDeRattachement, String numeroCarteInseree) {
+		this.banqueDeRattachement = banqueDeRattachement;
+		this.numeroCarteInseree = numeroCarteInseree;
 	}
 
-	public void afficher_init() {
-		System.out.println("Bienvenue au distribteur de " + BanqueDeRattachement.getNomBanque());
+	public void afficheInit() {
+		System.out.println("Bienvenue au distribteur de " + banqueDeRattachement.getNomBanque());
 		System.out.println("Vous avez déjà passé l'Authentification d'identité");
-		// System.out.println("Le numéro de la carte insérée est : " + carteInseree.getNoCarte());
+		System.out.println("Nous supposons donc que c'est la carte de Bob qui a été insérée.");
 	}
 
-	public void menu() {
+	public void afficheMenu() {
 		System.out.println("-------MENU-------");
 		System.out.println("1. Consultation");
 		System.out.println("2. Virement");
@@ -105,7 +143,7 @@ public class Distrib {
 		System.out.println("------------------");
 	}
 
-	public static int getInt(int min, int max) {
+	public static int getChoixMenu(int min, int max) {
 		System.out.print("Tapez votre choix : ");
 		Scanner input = new Scanner(System.in);
 		int choix = input.nextInt();
@@ -119,55 +157,38 @@ public class Distrib {
 	}
 
 	public void lanceDistributeur() {
-		afficher_init();
-		menu();
+		afficheInit();
 
-		int choix = getInt(1, 3);
+		int choix;
 
-		while (choix > 0 && choix < 3) {
+		do {
+			afficheMenu();
+
+			choix = getChoixMenu(1, 3);
+
 			System.out.println("Votre choix est : " + choix);
 
-			traiterChoix(choix);
-
-			choix = getInt(1, 3);
-		}
+			traiteChoixMenu(choix);
+		} while (choix < 3);
 
 		System.out.println("Au revoir !");
 	}
-	
-	public void traiterChoix(int choix) {
+
+	public void traiteChoixMenu(int choix) {
 		switch(choix) {
 			case 1:
 				System.out.println("Traitement consultation...");
-				System.out.println("Nous supposons que c'est la carte de Bob qui a été insérée.");
 
-				consultation(initCarteClientBob());
+				choixConsultation();
 				break;
 			case 2:
-				System.out.println("Traitement Virement... (non réalisé)");
+				System.out.println("Traitement Virement...");
+
+				choixVirement();
 				break;
 			default :
 				System.out.println("Erreur...");
 				break;
 		}
 	}
-	
-	// init une CarteClient de Bob(je suis pas sur comment insérer une carte)
-	private Carte initCarteClientBob() {
-		
-		Carte carte_physique_Bob = new Carte("CA1234567", "password");
-		/*
-		Compte compte_Bob_1 = new Compte(100, "CA1234567");
-		Compte compte_Bob_2 = new Compte(200, "CA7654321");
-		List<Compte> listCompteBob = new ArrayList<Compte>();
-		listCompteBob.add(compte_Bob_1);
-		listCompteBob.add(compte_Bob_2);
-		
-		Client Bob = new Client("12345_Bob", listCompteBob, null);
-		CarteClient carte_Bob = new CarteClient("CA1234567", Bob);
-		*/
-		return carte_physique_Bob;
-		
-	}
-
 }

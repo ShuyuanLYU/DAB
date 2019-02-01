@@ -13,17 +13,19 @@ public class Main {
 		List<Client> listeClientsCA = initClientsCA(listeComptesBob);
 		List<CarteClient> listeCartesClients = initCartesClient(listeClientsCA);
 
-		Banque lcl = new Banque("Crédit lyonnais", "LCL");
-		
-		Distrib d = new Distrib(initBanque(listeClientsCA, listeCartesClients));
-		
-		//lance distrib
-		d.lanceDistributeur();
+		Banque LCL = new Banque("Crédit lyonnais", "LCL");
+
+		/* Initialise distrib avec le numéro de la carte car
+		   l'authentification est déjà effectuée et la carte est déjà insérée */
+		Distrib distrib = new Distrib(initBanque(listeClientsCA, listeCartesClients), "0123456789");
+
+		// Lance l'interface du distributeur
+		distrib.lanceDistributeur();
     }
 
     private static List<Compte> initComptes() {
-		Compte compte_Bob_1 = new Compte(100, "CA1234567");
-		Compte compte_Bob_2 = new Compte(200, "CA7654321");
+		Compte compte_Bob_1 = new Compte(100, "CA1234567", -100);
+		Compte compte_Bob_2 = new Compte(200, "CA7654321", 0);
 
 		List<Compte> listeComptesBob = new ArrayList<>();
 		listeComptesBob.add(compte_Bob_1);

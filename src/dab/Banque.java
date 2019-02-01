@@ -10,11 +10,11 @@ public class Banque {
 	private String nomBanque;
 	private String codeBanque;
 
-	public List<Banque> autresBanques = new ArrayList<Banque>();
+	public List<Banque> autresBanques = new ArrayList<>();
 
-	private List<Client> listeClients = new ArrayList<Client>();
-	private List<CarteClient> listeCartesClients = new ArrayList<CarteClient>();
-	private List<Compte> ListCompte = new ArrayList<Compte>();
+	private List<Client> listeClients = new ArrayList<>();
+	private List<CarteClient> listeCartesClients = new ArrayList<>();
+	private List<Compte> ListCompte = new ArrayList<>();
 
 	public Banque(String nomBanque, String codeBanque) {
 		this.nomBanque = nomBanque;
@@ -39,16 +39,15 @@ public class Banque {
 	}
 
 	public List<Compte> recupereComptesConsultation(String noCarte) {
-		//System.out.println("[Banque] - recupereComptesConsultation LANCER -> " + noCarte); // trace
-		for (CarteClient tmp : listeCartesClients) { // parcourir tout les CarteClient
-			if (tmp.verifierNumeroCarte(noCarte)) {
-				Client client_trouve = tmp.recupereClient(); // si on le trouve
+		for (CarteClient carteClient : listeCartesClients) {
+			if (carteClient.verifierNumeroCarte(noCarte)) {
+				Client clientTrouve = carteClient.recupereClient(); // si on le trouve
 
-				return client_trouve.recupereComptes(); // on revoie la liste des comptes
+				return clientTrouve.recupereComptes(); // on revoie la liste des comptes
 			}
 		}
 
-		return new ArrayList<Compte>(); // sinon, on revoie une liste vide
+		return new ArrayList<>(); // sinon, on revoie une liste vide
 	}
 
 	private void recupereComptesDestinataire() {

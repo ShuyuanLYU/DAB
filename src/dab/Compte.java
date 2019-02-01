@@ -8,19 +8,28 @@ import java.util.List;
 public class Compte {
 
 	private float Solde;
-	private String noCompte;
+	private String numeroCompte;
 	private float plafondRetrait;
-	private List<Client> client = new ArrayList<Client>();
-	private List<OperationBancaire> listOB = new ArrayList<OperationBancaire>();
+	private List<Client> client = new ArrayList<>();
+	private List<OperationBancaire> listOB = new ArrayList<>();
+
+	public String getNumeroCompte() {
+		return numeroCompte;
+	}
 	
-	public Compte(float Solde, String noCompte, float plafondRetrait) {
+	public Compte(float Solde, String numeroCompte, float plafondRetrait) {
 		this.Solde = Solde;
-		this.noCompte = noCompte;
+		this.numeroCompte = numeroCompte;
 		this.plafondRetrait = plafondRetrait;
     }
 
 	public String afficheCompte() {
-		return "No Compte : " + noCompte + "\n" + "Solde : " + Solde + "\n" + "plafondRetrait : ";
+		return "Numéro compte : " + numeroCompte + "\n" + "Solde : " + Solde + "\n";
+	}
+
+	public String afficheDetailsCompte() {
+		return "Numéro compte : " + numeroCompte + "\n" + "Solde : " + Solde + "\n" +
+				"Plafond de retrait : " + plafondRetrait;
 	}
 
 	public Compte recupereCompte() {
@@ -28,18 +37,10 @@ public class Compte {
 	}
 
 	public String afficheCompteVirement() {
-		return "No Compte : " + noCompte + "\n" + "Solde : " + Solde;
+		return "Numéro compte : " + numeroCompte + "\n" + "Solde : " + Solde;
 	}
 
 	public boolean verifierVirementPossible(double somme, Date date) {
 		return Solde >= somme;
 	}
-
-	//----
-	public Compte(float Solde, String noCompte) {
-		this.Solde = Solde;
-		this.noCompte = noCompte;
-		//this.plafondRetrait = plafondRetrait;
-    }
-
 }

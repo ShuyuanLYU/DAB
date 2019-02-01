@@ -13,11 +13,11 @@ public class ComptesVirement {
 		this.listeComptesDestinataires = listeComptesDestinataires;
 	}
 	
-	public List<Compte> getlisteComptes(){
+	public List<Compte> getListeComptes(){
 		return listeComptes;
 	}
 	
-	public List<CompteDestinataire> getlisteComptesDestinataires(){
+	public List<CompteDestinataire> getListeComptesDestinataires(){
 		return listeComptesDestinataires;
 	}
 }

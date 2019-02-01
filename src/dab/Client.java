@@ -6,8 +6,8 @@ import java.util.List;
 public class Client {
 	
 	private String nomClient;
-	private List<Compte> listeComptes = new ArrayList<Compte>();
-	private List<CompteDestinataire> listeComptesDestinataires = new ArrayList<CompteDestinataire>();
+	private List<Compte> listeComptes;
+	private List<CompteDestinataire> listeComptesDestinataires;
 
 	public String getNomClient() {
 		return nomClient;
@@ -21,15 +21,18 @@ public class Client {
 	
 	public List<Compte> recupereComptes() {
 		if(listeComptes == null)
-			listeComptes = new ArrayList<Compte>();
+			listeComptes = new ArrayList<>();
+
 		return listeComptes;
 	}
 
 	public ComptesVirement recupereComptesVirement() {
 		if(listeComptes == null)
-			listeComptes = new ArrayList<Compte>();
+			listeComptes = new ArrayList<>();
+
 		if(listeComptesDestinataires == null)
-			listeComptesDestinataires = new ArrayList<CompteDestinataire>();
+			listeComptesDestinataires = new ArrayList<>();
+
 		return new ComptesVirement(listeComptes, listeComptesDestinataires);
 	}
 

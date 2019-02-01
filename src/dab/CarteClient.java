@@ -2,29 +2,27 @@ package dab;
 
 public class CarteClient {
 
-    private String noCarte;
+    private String numeroCarte;
     private Client client;
     
-    public CarteClient(String NoCarte, Client client) {
-    	this.noCarte = NoCarte;
+    public CarteClient(String numeroCarte, Client client) {
+    	this.numeroCarte = numeroCarte;
     	this.client = client;
     }
     
-    public String getNoCarte() {
-    	// System.out.println("[CarteClient] - getNoCarte -> " + noCarte);
-    	return noCarte;
+    public String getNumeroCarte() {
+    	return numeroCarte;
     }
 
-    public boolean verifierNumeroCarte(String noCarte) {
-        return noCarte.equals(noCarte);
+    public boolean verifierNumeroCarte(String numeroCarte) {
+        return this.numeroCarte.equals(numeroCarte);
     }
 
     public Client recupereClient() {
-    	// System.out.println("CarteClient - recupereClient -> " + client.getNomClient());
         return client;
     }
     // pour test
     public String toString() {
-    	return "NoCarte : " + noCarte + " client : " + client.getNomClient();
+    	return "NoCarte : " + numeroCarte + " client : " + client.getNomClient();
     }
 }
