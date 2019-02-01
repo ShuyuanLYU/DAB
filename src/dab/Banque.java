@@ -8,21 +8,17 @@ import java.util.List;
 public class Banque {
 
 	private String nomBanque;
-
 	private String codeBanque;
 
 	public List<Banque> autresBanques = new ArrayList<Banque>();
 
-	private List<Client> listClient = new ArrayList<Client>();
-
-	private List<CarteClient> ListCarteClient = new ArrayList<CarteClient>();
-
+	private List<Client> listeClients = new ArrayList<Client>();
+	private List<CarteClient> listeCartesClients = new ArrayList<CarteClient>();
 	private List<Compte> ListCompte = new ArrayList<Compte>();
 
 	public Banque(String nomBanque, String codeBanque) {
 		this.nomBanque = nomBanque;
 		this.codeBanque = codeBanque;
-
 	}
 
 	public boolean estUnClient(String noCarte) {
@@ -44,13 +40,14 @@ public class Banque {
 
 	public List<Compte> recupereComptesConsultation(String noCarte) {
 		//System.out.println("[Banque] - recupereComptesConsultation LANCER -> " + noCarte); // trace
-		for (int i = 0; i < ListCarteClient.size(); i++) { // parcourir tout les CarteClient
-			CarteClient tmp = ListCarteClient.get(i);
+		for (CarteClient tmp : listeCartesClients) { // parcourir tout les CarteClient
 			if (tmp.verifierNumeroCarte(noCarte)) {
 				Client client_trouve = tmp.recupereClient(); // si on le trouve
+
 				return client_trouve.recupereComptes(); // on revoie la liste des comptes
 			}
 		}
+
 		return new ArrayList<Compte>(); // sinon, on revoie une liste vide
 	}
 
@@ -65,25 +62,27 @@ public class Banque {
 
 	// pour test
 	public void afficheListClient() {
-		System.out.println("size of ListClient: " + listClient.size());
-		for (int i = 0; i < listClient.size(); i++) {
-			Client tmp = listClient.get(i);
+		System.out.println("size of ListClient: " + listeClients.size());
+
+		for (Client tmp : listeClients) {
 			System.out.println(tmp.toString());
 		}
 	}
 
 	// pour init Banque
 	public void ajouteClient(Client c) {
-		if (listClient == null)
-			listClient = new ArrayList<Client>();
-		listClient.add(c);
+		if (listeClients == null)
+			listeClients = new ArrayList<Client>();
+
+		listeClients.add(c);
 	}
 
 	// pour init Banque
 	public void ajouteCarteClient(CarteClient cc) {
-		if (ListCarteClient == null)
-			ListCarteClient = new ArrayList<CarteClient>();
-		ListCarteClient.add(cc);
+		if (listeCartesClients == null)
+			listeCartesClients = new ArrayList<CarteClient>();
+
+		listeCartesClients.add(cc);
 	}
 
 }

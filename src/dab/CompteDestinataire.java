@@ -2,12 +2,12 @@ package dab;
 
 public class CompteDestinataire {
 
-    private String Iban;
-    private String BIC;
+    private String iban;
+    private String bic;
 
-    public CompteDestinataire(String Iban, String BIC) {
-    	this.Iban = Iban;
-    	this.BIC = BIC;
+    public CompteDestinataire(String iban, String bic) {
+    	this.iban = iban;
+    	this.bic = bic;
     }
     
     public CompteDestinataire recupereCompte() {
@@ -15,9 +15,7 @@ public class CompteDestinataire {
     }
 
     public String afficheCompte() {
-        return "Iban : " + Iban + "\n" + "BIC : " + BIC;
+        return "Iban : " + iban + "\n" + "BIC : " + bic;
     }
-
-
 
 }

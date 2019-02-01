@@ -5,36 +5,37 @@ import java.util.List;
 
 public class Client {
 	
-	private String NomClient;
-	private List<Compte> ListCompte = new ArrayList<Compte>();
-	private List<CompteDestinataire> ListCompteDestinataire = new ArrayList<CompteDestinataire>();
+	private String nomClient;
+	private List<Compte> listeComptes = new ArrayList<Compte>();
+	private List<CompteDestinataire> listeComptesDestinataires = new ArrayList<CompteDestinataire>();
 
 	public String getNomClient() {
-		return NomClient;
+		return nomClient;
 	}
 	
-	public Client(String NomClient, List<Compte> ListCompte, List<CompteDestinataire> compteDestinataire) {
-		this.NomClient = NomClient;
-		this.ListCompte = ListCompte;
-		this.ListCompteDestinataire = compteDestinataire;
+	public Client(String nomClient, List<Compte> listeComptes, List<CompteDestinataire> compteDestinataires) {
+		this.nomClient = nomClient;
+		this.listeComptes = listeComptes;
+		this.listeComptesDestinataires = compteDestinataires;
 	}
 	
 	public List<Compte> recupereComptes() {
-		if(ListCompte == null)
-			ListCompte = new ArrayList<Compte>();
-		return ListCompte;
+		if(listeComptes == null)
+			listeComptes = new ArrayList<Compte>();
+		return listeComptes;
 	}
 
 	public ComptesVirement recupereComptesVirement() {
-		if(ListCompte == null)
-			ListCompte = new ArrayList<Compte>();
-		if(ListCompteDestinataire == null)
-			ListCompteDestinataire = new ArrayList<CompteDestinataire>();
-		return new ComptesVirement(ListCompte, ListCompteDestinataire);
+		if(listeComptes == null)
+			listeComptes = new ArrayList<Compte>();
+		if(listeComptesDestinataires == null)
+			listeComptesDestinataires = new ArrayList<CompteDestinataire>();
+		return new ComptesVirement(listeComptes, listeComptesDestinataires);
 	}
+
 	// ---- pour test
 	public String toString() {
-		return "Client " + NomClient;
+		return "Client " + nomClient;
 		// + " possède " + ListCompte.size() + "ListCompte.";
 	}
 

@@ -7,35 +7,59 @@ public class Main {
 
     public static void main(String[] args) {
     	
-    	// init compte/client/carteclient/banque/distrib...
-    	Compte compte_Bob_1 = new Compte(100, "CA1234567");
-		Compte compte_Bob_2 = new Compte(200, "CA7654321");
-		List<Compte> listCompteBob = new ArrayList<Compte>();
-		listCompteBob.add(compte_Bob_1);
-		listCompteBob.add(compte_Bob_2);
+    	// initialisation compte/client/carteclient/banque/distrib...
+
+		List<Compte> listeComptesBob = initComptes();
+		List<Client> listeClientsCA = initClientsCA(listeComptesBob);
+		List<CarteClient> listeCartesClients = initCartesClient(listeClientsCA);
+
+		Banque lcl = new Banque("Crédit lyonnais", "LCL");
 		
-		Client Bob = new Client("12345_Bob", listCompteBob, null);
-		Client Léo = new Client("11111_Leo", null, null);
-		Client Davide = new Client("22222_Davide", null, null);
-		
-		CarteClient carte_Bob = new CarteClient("CA1234567", Bob);
-		CarteClient carte_Leo = new CarteClient("CA1111111", Léo);
-		CarteClient carte_Davide = new CarteClient("CA2222222", Davide);
-		
-		Banque CA = new Banque("Crédit Agricole", "CA");
-		CA.ajouteClient(Bob);
-		CA.ajouteClient(Léo);
-		CA.ajouteClient(Davide);
-		CA.ajouteCarteClient(carte_Bob);
-		CA.ajouteCarteClient(carte_Leo);
-		CA.ajouteCarteClient(carte_Davide);
-		
-		Banque LCL = new Banque("Crédit lyonnais", "LCL");
-		
-		Distrib d = new Distrib(CA);
+		Distrib d = new Distrib(initBanque(listeClientsCA, listeCartesClients));
 		
 		//lance distrib
 		d.lanceDistributeur();
-
     }
+
+    private static List<Compte> initComptes() {
+		Compte compte_Bob_1 = new Compte(100, "CA1234567");
+		Compte compte_Bob_2 = new Compte(200, "CA7654321");
+
+		List<Compte> listeComptesBob = new ArrayList<>();
+		listeComptesBob.add(compte_Bob_1);
+		listeComptesBob.add(compte_Bob_2);
+
+		return listeComptesBob;
+	}
+
+	private static List<Client> initClientsCA(List<Compte> listeComptesBob) {
+    	List<Client> listeClients= new ArrayList<>();
+
+		listeClients.add(new Client("12345_Bob", listeComptesBob, null));
+		listeClients.add(new Client("11111_Leo", null, null));
+		listeClients.add(new Client("22222_David", null, null));
+
+		return listeClients;
+	}
+
+	private static List<CarteClient> initCartesClient(List<Client> listeClients) {
+    	List<CarteClient> listeCartesClients = new ArrayList<>();
+
+    	for(Client client : listeClients)
+			listeCartesClients.add(new CarteClient("0123456789", client));
+
+		return listeCartesClients;
+	}
+
+	private static Banque initBanque(List<Client> listeClients, List<CarteClient> listeCarteClients) {
+		Banque banque = new Banque("Crédit Agricole", "CA");
+
+		for(Client client : listeClients)
+			banque.ajouteClient(client);
+
+		for(CarteClient carteClient : listeCarteClients)
+			banque.ajouteCarteClient(carteClient);
+
+    	return banque;
+	}
 }

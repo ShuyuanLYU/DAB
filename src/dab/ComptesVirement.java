@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ComptesVirement {
-	private List<Compte> ListCompte = new ArrayList<Compte>();
+	private List<Compte> listeComptes = new ArrayList<>();
 
-	private List<CompteDestinataire> ListCompteDestinataire = new ArrayList<CompteDestinataire>();
+	private List<CompteDestinataire> listeComptesDestinataires = new ArrayList<CompteDestinataire>();
 
-	public ComptesVirement(List<Compte> ListCompte, List<CompteDestinataire> ListCompteDestinataire) {
-		this.ListCompte = ListCompte;
-		this.ListCompteDestinataire = ListCompteDestinataire;
+	public ComptesVirement(List<Compte> listeComptes, List<CompteDestinataire> listeComptesDestinataires) {
+		this.listeComptes = listeComptes;
+		this.listeComptesDestinataires = listeComptesDestinataires;
 	}
 	
-	public List<Compte> getListCompte(){
-		return ListCompte;
+	public List<Compte> getlisteComptes(){
+		return listeComptes;
 	}
 	
-	public List<CompteDestinataire> getListCompteDestinataire(){
-		return ListCompteDestinataire;
+	public List<CompteDestinataire> getlisteComptesDestinataires(){
+		return listeComptesDestinataires;
 	}
 }

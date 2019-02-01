@@ -5,12 +5,12 @@ import java.util.Date;
 public class OperationBancaire {
 
 	private NatureOperation nature;
-	private float Montant;
+	private float montant;
 	private Date dateOperation;
 	
 	public OperationBancaire(NatureOperation nature, float montant, Date dateOperation) {
 		this.nature = nature;
-		this.Montant = montant;
+		this.montant = montant;
 		this.dateOperation = dateOperation;
     }
 
@@ -18,7 +18,7 @@ public class OperationBancaire {
 	}
 
 	public String afficheOB() {
-		return "Nature Operation : " + nature + "\n" + "Montant : " + Montant + "\n" + "Date Operation : "
+		return "Nature Operation : " + nature + "\n" + "Montant : " + montant + "\n" + "Date Operation : "
 				+ dateOperation.toString() + "\n";
 	}
 

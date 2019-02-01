@@ -34,6 +34,7 @@ public class Compte {
 	public boolean verifierVirementPossible(double somme, Date date) {
 		return Solde >= somme;
 	}
+
 	//----
 	public Compte(float Solde, String noCompte) {
 		this.Solde = Solde;
