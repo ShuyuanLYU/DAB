@@ -30,7 +30,7 @@ public class Distrib {
 	}
 
 	// private void consultation(Client compteClient) { <----version origine
-	private void consultation(CarteClient carteInseree_auth) {
+	private void consultation(Carte carteInseree_auth) {
 		System.out.println(
 				"Consultation lance, \nVotre Numéro de la Carte Insérée est " + carteInseree_auth.getNoCarte() + ".");
 		List<Compte> list_compte_consultation = BanqueDeRattachement
@@ -141,7 +141,10 @@ public class Distrib {
 	}
 	
 	// init une CarteClient de Bob(je suis pas sur comment insérer une carte)
-	private CarteClient initCarteClientBob() {
+	private Carte initCarteClientBob() {
+		
+		Carte carte_phisique_Bob = new Carte("CA1234567", "password");
+		/*
 		Compte compte_Bob_1 = new Compte(100, "CA1234567");
 		Compte compte_Bob_2 = new Compte(200, "CA7654321");
 		List<Compte> listCompteBob = new ArrayList<Compte>();
@@ -150,7 +153,9 @@ public class Distrib {
 		
 		Client Bob = new Client("12345_Bob", listCompteBob, null);
 		CarteClient carte_Bob = new CarteClient("CA1234567", Bob);
-		return carte_Bob;
+		*/
+		return carte_phisique_Bob;
+		
 	}
 
 }
