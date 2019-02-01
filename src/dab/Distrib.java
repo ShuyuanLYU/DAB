@@ -60,7 +60,7 @@ public class Distrib {
 		int choix = input.nextInt();
 
 		while (choix < 1 || choix > listeComptes.size() + 1) {
-			System.out.print("Tapez votre choix entre " + 1 + " et " + listeComptes.size() + 1 + " svp : ");
+			System.out.print("Tapez votre choix entre " + 1 + " et " + (listeComptes.size() + 1) + " svp : ");
 			choix = input.nextInt();
 		}
 
@@ -78,10 +78,10 @@ public class Distrib {
 	private void afficheMenuDetailsCompte(List<Compte> listeComptes) {
 		int indice = 1;
 		for(Compte compte : listeComptes) {
-			System.out.println(indice++ + ". Voir détails de : " + compte.getNumeroCompte() );
+			System.out.println(" " + indice++ + ". Voir détails de : " + compte.getNumeroCompte() );
 		}
 
-		System.out.println(indice + ". Retour au menu");
+		System.out.println(" " + indice + ". Retour au menu");
 		System.out.println("-----------------------");
 	}
 
@@ -112,24 +112,26 @@ public class Distrib {
 		List<CompteDestinataire> listeComptesDestinataires = (List<CompteDestinataire>) listeComptes[1];
 		if (listeComptesPerso != null && listeComptesDestinataires != null) {
 			int indice = 1;
-			System.out.println("-------Liste Comptes �metteurs-------");
+			System.out.println("-------------------------------------------");
+			System.out.println("      ----Liste Comptes �metteurs----   ");
 			for(Compte comptePerso : listeComptesPerso) {
-				System.out.print(indice++ + ". ");
+				System.out.print(" " + indice++ + ". ");
 				System.out.println(comptePerso.afficheCompteVirement());
 			}
 				
-			System.out.println("-------------------------------------");
-			System.out.println("-----Liste Comptes destinataires-----");
+			System.out.println("      -------------------------------   ");
+			System.out.println("      --Liste Comptes destinataires--   ");
 			for(Compte comptePerso : listeComptesPerso) {
-				System.out.print(indice++ + ". ");
+				System.out.print(" " + indice++ + ". ");
 				System.out.println(comptePerso.afficheCompteVirement());
 			}
 			for(CompteDestinataire compteDestinataire : listeComptesDestinataires) {
-				System.out.print(indice++ + ". ");
+				System.out.print(" " + indice++ + ". ");
 				System.out.println(compteDestinataire.afficheCompte());
 			}
-			System.out.println("-------------------------------------");
-			System.out.println(indice + ". Retour au menu");
+			System.out.println("      -------------------------------   ");
+			System.out.println(" " + indice + ". Retour au menu");
+			System.out.println("-------------------------------------------");
 			
 		}
 			
@@ -159,11 +161,11 @@ public class Distrib {
 	}
 
 	public void afficheMenu() {
-		System.out.println("-------MENU-------");
-		System.out.println("1. Consultation");
-		System.out.println("2. Virement");
-		System.out.println("3. Retirer votre carte (Quitter)");
-		System.out.println("------------------");
+		System.out.println("   +-------------MENU----------------+");
+		System.out.println("   | 1. Consultation.                |");
+		System.out.println("   | 2. Virement.                    |");
+		System.out.println("   | 3. Retirer votre carte.(Quitter)|");
+		System.out.println("   +---------------------------------+");
 	}
 
 	public static int getChoixMenu(int min, int max) {
@@ -189,7 +191,7 @@ public class Distrib {
 
 			choix = getChoixMenu(1, 3);
 
-			System.out.println("Votre choix est : " + choix);
+			//System.out.println("Votre choix est : " + choix);
 
 			traiteChoixMenu(choix);
 		} while (choix < 3);

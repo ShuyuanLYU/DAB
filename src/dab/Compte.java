@@ -17,21 +17,21 @@ public class Compte {
 	public String getNumeroCompte() {
 		return numeroCompte;
 	}
-	
+
 	public Compte(float Solde, String numeroCompte, float plafondRetrait, float soldeMinimum) {
 		this.Solde = Solde;
 		this.numeroCompte = numeroCompte;
 		this.plafondRetrait = plafondRetrait;
 		this.soldeMinimum = soldeMinimum;
-    }
+	}
 
 	public String afficheCompte() {
-		return "Numéro compte : " + numeroCompte + "\n" + "Solde : " + Solde + "\n";
+		return "  Numéro compte : " + numeroCompte + "\n" + "  Solde : " + Solde;
 	}
 
 	public String afficheDetailsCompte() {
-		return "Numéro compte : " + numeroCompte + "\n" + "Solde : " + Solde + "\n" +
-				"Plafond de retrait : " + plafondRetrait + "\n" + "Solde minimum : " + soldeMinimum;
+		return "  Numéro compte : " + numeroCompte + "\n" + "  Solde : " + Solde + "\n" + "  Plafond de retrait : "
+				+ plafondRetrait + "\n" + "  Solde minimum : " + soldeMinimum;
 	}
 
 	public Compte recupereCompte() {
