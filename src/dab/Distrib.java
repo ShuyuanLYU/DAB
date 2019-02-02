@@ -30,8 +30,14 @@ public class Distrib {
 
 		List<Compte> listeComptes = banqueDeRattachement.recupereComptesConsultation(numeroCarteInseree);
 
-		if (listeComptes.size() > 0)
+		if (listeComptes.size() > 0) {
 			afficheListeComptes(listeComptes);
+			afficheMenuDetailsCompte(listeComptes);
+		int choix = getChoixDetailsCompte(listeComptes.size());
+		traiteChoixDetailsCompte(listeComptes, choix);
+		}
+			
+		
 		else
 			System.out.println("Aucun compte n'a été trouvé."); // Ne devrait jamais se produire
 	}
@@ -48,9 +54,7 @@ public class Distrib {
 
 		System.out.println("-------- Fin de liste ---------");
 
-		afficheMenuDetailsCompte(listeComptes);
-		int choix = getChoixDetailsCompte(listeComptes.size());
-		traiteChoixDetailsCompte(listeComptes, choix);
+		
 	}
 
 	private int getChoixDetailsCompte(int tailleListe) {
@@ -120,10 +124,26 @@ public class Distrib {
 		Object compteDestinataireChoisi = listeCompteDestinataireAChoisir.get(getChoixCompte(listeComptesDestinataires.size() + listeComptesPersosMoinsChoix.size()) - 1);
 	
 		// TODO Recupere somme, date et message
-	
-
-		// int[] indiceChoixComptes = obtenirIndiceComptesVirement();
-		//obtenirInfoVirement(listeComptesPerso, listeComptesDestinataires);
+		Scanner input = new Scanner(System.in);
+		System.out.print("Somme : ");
+		String somme = input.next();
+		System.out.print("Date : ");
+		String date = input.next();
+		System.out.print("Message : ");
+		String message = input.next();
+		
+		// test & trace
+		System.out.println("Trace test");
+		System.out.println("- 1 comptePersoChoisi -");
+		System.out.println(comptePersoChoisi.afficheCompte());
+		System.out.println("- 2 compteDestinataireChoisi -(" + compteDestinataireChoisi.getClass().toString() + ")");
+		if(compteDestinataireChoisi.getClass().toString().equals("class dab.Compte")) 
+			System.out.println(((Compte)compteDestinataireChoisi).afficheCompte());
+		else
+			System.out.println(((CompteDestinataire) compteDestinataireChoisi).afficheCompte());
+		System.out.println("- 3 - Somme : " + somme);
+		System.out.println("- 4 - Date : " + date);
+		System.out.println("- 5 - Message : " + message);
 	}
 	
 	private int getChoixCompte(int tailleListe) {
@@ -254,11 +274,11 @@ public class Distrib {
 	}
 
 	public void afficheMenu() {
-		System.out.println("   +-------------MENU----------------+");
-		System.out.println("   | 1. Consultation.                |");
-		System.out.println("   | 2. Virement.                    |");
-		System.out.println("   | 3. Retirer votre carte.(Quitter)|");
-		System.out.println("   +---------------------------------+");
+		System.out.println(" +-------------MENU----------------+");
+		System.out.println(" | 1. Consultation.                |");
+		System.out.println(" | 2. Virement.                    |");
+		System.out.println(" | 3. Retirer votre carte.(Quitter)|");
+		System.out.println(" +---------------------------------+");
 	}
 
 	public static int getChoixMenu(int min, int max) {
