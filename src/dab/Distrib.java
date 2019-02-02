@@ -1,5 +1,6 @@
 package dab;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -48,19 +49,20 @@ public class Distrib {
 		System.out.println("-------- Fin de liste ---------");
 
 		afficheMenuDetailsCompte(listeComptes);
-		int choix = getChoixDetailsCompte(listeComptes);
+		int choix = getChoixDetailsCompte(listeComptes.size());
 		traiteChoixDetailsCompte(listeComptes, choix);
 	}
 
-	private int getChoixDetailsCompte(List<Compte> listeComptes) {
+	private int getChoixDetailsCompte(int tailleListe) {
 		System.out.print("Tapez votre choix : ");
 		Scanner input = new Scanner(System.in);
 		int choix = input.nextInt();
 
-		while (choix < 1 || choix > listeComptes.size() + 1) {
-			System.out.print("Tapez votre choix entre " + 1 + " et " + (listeComptes.size() + 1) + " svp : ");
+		while (choix < 1 || choix > tailleListe + 1) {
+			System.out.print("Tapez votre choix entre " + 1 + " et " + (tailleListe + 1) + " svp : ");
 			choix = input.nextInt();
 		}
+		
 		return choix;
 	}
 
@@ -74,6 +76,7 @@ public class Distrib {
 
 	private void afficheMenuDetailsCompte(List<Compte> listeComptes) {
 		int indice = 1;
+		
 		for (Compte compte : listeComptes) {
 			System.out.println(" " + indice++ + ". Voir détails de : " + compte.getNumeroCompte());
 		}
@@ -84,10 +87,6 @@ public class Distrib {
 
 	private void choisirCompte(Compte compte) {
 		// TO DO
-	}
-
-	private void afficheCompte(Compte compte) {
-		System.out.println(compte.afficheCompte());
 	}
 
 	private void gererCompte(Compte compte) {
@@ -103,13 +102,40 @@ public class Distrib {
 
 		Object[] listeComptes = banqueDeRattachement.recupereComptesVirement(numeroCarteInseree);
 
-		List<Compte> listeComptesPerso = (List<Compte>) listeComptes[0];
+		List<Compte> listeComptesPersos = (List<Compte>) listeComptes[0];
 		List<CompteDestinataire> listeComptesDestinataires = (List<CompteDestinataire>) listeComptes[1];
-		afficheListeComptesVirement(listeComptesPerso, listeComptesDestinataires);
+		
+		afficheListeComptesPersosVirement(listeComptesPersos);
+		int indiceComptePersoChoisi = getChoixCompte(listeComptesPersos.size()) - 1;
+		Compte comptePersoChoisi = listeComptesPersos.get(indiceComptePersoChoisi);
+		
+		List<Compte> listeComptesPersosMoinsChoix = new ArrayList<Compte>(listeComptesPersos);
+		listeComptesPersosMoinsChoix.remove(indiceComptePersoChoisi);
+		
+		afficheListeComptesDestinatairesVirement(listeComptesPersosMoinsChoix, listeComptesDestinataires);
+		
+		ArrayList<Object> listeCompteDestinataireAChoisir = new ArrayList<Object>(listeComptesPersosMoinsChoix);
+		listeCompteDestinataireAChoisir.add(listeComptesDestinataires);
+		Object compteDestinataireChoisi = listeCompteDestinataireAChoisir.get(getChoixCompte(listeComptesDestinataires.size() + listeComptesPersosMoinsChoix.size()) - 1);
+	
+		// TODO Recupere somme, date et message
+	
 
-		// System.out.println("Choix a espace choix b : ");
 		// int[] indiceChoixComptes = obtenirIndiceComptesVirement();
-		obtenirInfoVirement(listeComptesPerso, listeComptesDestinataires);
+		//obtenirInfoVirement(listeComptesPerso, listeComptesDestinataires);
+	}
+	
+	private int getChoixCompte(int tailleListe) {
+		System.out.print("Tapez votre choix : ");
+		Scanner input = new Scanner(System.in);
+		int choix = input.nextInt();
+
+		while (choix < 1 || choix > tailleListe) {
+			System.out.print("Tapez votre choix entre " + 1 + " et " + tailleListe + " svp : ");
+			choix = input.nextInt();
+		}
+		
+		return choix;
 	}
 
 	private int[] obtenirIndiceComptesVirement() {
@@ -124,8 +150,6 @@ public class Distrib {
 		}
 		return num;
 	}
-	
-	
 	
 	private Object[] obtenirInfoVirement(List<Compte> listeComptesPerso, List<CompteDestinataire> listeComptesDestinataires) {
 		Object info[] = new Object[5];
@@ -171,32 +195,44 @@ public class Distrib {
 		
 	}
 
-	private void afficheListeComptesVirement(List<Compte> listeComptesPerso, List<CompteDestinataire> listeComptesDestinataires) {
-		if (listeComptesPerso != null && listeComptesDestinataires != null) {
+	private void afficheListeComptesPersosVirement(List<Compte> listeComptesPerso) {
+		if (listeComptesPerso.size() > 0) {
 			int indice = 1;
 			System.out.println("-------------------------------------------");
 			System.out.println("      ----Liste Comptes �metteurs----   ");
+			
 			for (Compte comptePerso : listeComptesPerso) {
 				System.out.print(" " + indice++ + ". ");
 				System.out.println(comptePerso.afficheCompteVirement());
 			}
-
+			
 			System.out.println("      -------------------------------   ");
-			System.out.println("      --Liste Comptes destinataires--   ");
-			for (Compte comptePerso : listeComptesPerso) {
-				System.out.print(" " + indice++ + ". ");
-				System.out.println(comptePerso.afficheCompteVirement());
-			}
-			for (CompteDestinataire compteDestinataire : listeComptesDestinataires) {
-				System.out.print(" " + indice++ + ". ");
-				System.out.println(compteDestinataire.afficheCompte());
-			}
-			System.out.println("      -------------------------------   ");
-			System.out.println(" " + indice + ". Retour au menu");
-			System.out.println("-------------------------------------------");
-		} else
+		} 
+		else
 			System.out.println("Aucun compte n'a été trouvé."); // Ne devrait jamais se produire
-
+	}
+	
+	private void afficheListeComptesDestinatairesVirement(List<Compte> listeComptesPersos, List<CompteDestinataire> listeComptesDestinataires) {
+		if (listeComptesPersos.size() > 0 || listeComptesDestinataires.size() > 0) {
+			int indice = 1;
+			System.out.println("-------------------------------------------");
+			System.out.println("      ----Liste Comptes Destinataires----   ");
+			
+			
+			for (Compte compte : listeComptesPersos) {
+				System.out.print(" " + indice++ + ". ");
+				System.out.println(compte.afficheCompteVirement());
+			}
+			
+			for (CompteDestinataire compte : listeComptesDestinataires) {
+				System.out.print(" " + indice++ + ". ");
+				System.out.println(compte.afficheCompte());
+			}
+			
+			System.out.println("      -------------------------------   ");
+		} 
+		else
+			System.out.println("Aucun compte n'a été trouvé."); // Ne devrait jamais se produire
 	}
 
 	private boolean selectionneInformationsVirement(Compte compteEmission, Compte compteDestinataire, double somme,
@@ -233,6 +269,7 @@ public class Distrib {
 			System.out.print("Tapez votre choix entre " + min + " et " + max + " svp : ");
 			choix = input.nextInt();
 		}
+		
 		return choix;
 	}
 
@@ -249,8 +286,6 @@ public class Distrib {
 
 			traiteChoixMenu(choix);
 		} while (choix < 3);
-
-		System.out.println("Au revoir !");
 	}
 
 	public void traiteChoixMenu(int choix) {
@@ -264,6 +299,9 @@ public class Distrib {
 			System.out.println("Traitement Virement...");
 
 			choixVirement();
+			break;
+		case 3:
+			System.out.println("Au revoir !");
 			break;
 		default:
 			System.out.println("Erreur...");
