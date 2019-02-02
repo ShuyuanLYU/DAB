@@ -109,13 +109,14 @@ public class Distrib {
 		int indiceComptePersoChoisi = getChoixCompte(listeComptesPersos.size()) - 1;
 		Compte comptePersoChoisi = listeComptesPersos.get(indiceComptePersoChoisi);
 		
-		List<Compte> listeComptesPersosMoinsChoix = new ArrayList<Compte>(listeComptesPersos);
+		List<Compte> listeComptesPersosMoinsChoix = new ArrayList<>(listeComptesPersos);
 		listeComptesPersosMoinsChoix.remove(indiceComptePersoChoisi);
 		
 		afficheListeComptesDestinatairesVirement(listeComptesPersosMoinsChoix, listeComptesDestinataires);
 		
-		ArrayList<Object> listeCompteDestinataireAChoisir = new ArrayList<Object>(listeComptesPersosMoinsChoix);
-		listeCompteDestinataireAChoisir.add(listeComptesDestinataires);
+		ArrayList<Object> listeCompteDestinataireAChoisir = new ArrayList<>(listeComptesPersosMoinsChoix);
+		for(CompteDestinataire compte : listeComptesDestinataires)
+			listeCompteDestinataireAChoisir.add(compte);
 		Object compteDestinataireChoisi = listeCompteDestinataireAChoisir.get(getChoixCompte(listeComptesDestinataires.size() + listeComptesPersosMoinsChoix.size()) - 1);
 	
 		// TODO Recupere somme, date et message
