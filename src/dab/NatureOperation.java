@@ -1,6 +1,8 @@
 package dab;
 
 public enum NatureOperation {
-    Retrait,
-    virement;
+    retrait,
+    virement,
+    crédit,
+    débit
 }

@@ -14,9 +14,6 @@ public class OperationBancaire {
 		this.dateOperation = dateOperation;
     }
 
-	public void ajouteOperation(String nature, double montant, Date date) {
-	}
-
 	public String afficheOB() {
 		return "Nature Operation : " + nature + "\n" + "Montant : " + montant + "\n" + "Date Operation : "
 				+ dateOperation.toString() + "\n";

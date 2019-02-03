@@ -1,8 +1,12 @@
 package dab;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Distrib {
@@ -33,11 +37,10 @@ public class Distrib {
 		if (listeComptes.size() > 0) {
 			afficheListeComptes(listeComptes);
 			afficheMenuDetailsCompte(listeComptes);
-		int choix = getChoixDetailsCompte(listeComptes.size());
-		traiteChoixDetailsCompte(listeComptes, choix);
+			int choix = getChoixDetailsCompte(listeComptes.size());
+			traiteChoixDetailsCompte(listeComptes, choix);
 		}
-			
-		
+
 		else
 			System.out.println("Aucun compte n'a été trouvé."); // Ne devrait jamais se produire
 	}
@@ -54,7 +57,6 @@ public class Distrib {
 
 		System.out.println("-------- Fin de liste ---------");
 
-		
 	}
 
 	private int getChoixDetailsCompte(int tailleListe) {
@@ -66,7 +68,7 @@ public class Distrib {
 			System.out.print("Tapez votre choix entre " + 1 + " et " + (tailleListe + 1) + " svp : ");
 			choix = input.nextInt();
 		}
-		
+
 		return choix;
 	}
 
@@ -80,7 +82,7 @@ public class Distrib {
 
 	private void afficheMenuDetailsCompte(List<Compte> listeComptes) {
 		int indice = 1;
-		
+
 		for (Compte compte : listeComptes) {
 			System.out.println(" " + indice++ + ". Voir détails de : " + compte.getNumeroCompte());
 		}
@@ -108,44 +110,46 @@ public class Distrib {
 
 		List<Compte> listeComptesPersos = (List<Compte>) listeComptes[0];
 		List<CompteDestinataire> listeComptesDestinataires = (List<CompteDestinataire>) listeComptes[1];
-		
+
 		afficheListeComptesPersosVirement(listeComptesPersos);
 		int indiceComptePersoChoisi = getChoixCompte(listeComptesPersos.size()) - 1;
 		Compte comptePersoChoisi = listeComptesPersos.get(indiceComptePersoChoisi);
-		
+
 		List<Compte> listeComptesPersosMoinsChoix = new ArrayList<>(listeComptesPersos);
 		listeComptesPersosMoinsChoix.remove(indiceComptePersoChoisi);
-		
+
 		afficheListeComptesDestinatairesVirement(listeComptesPersosMoinsChoix, listeComptesDestinataires);
-		
+
 		ArrayList<Object> listeCompteDestinataireAChoisir = new ArrayList<>(listeComptesPersosMoinsChoix);
-		for(CompteDestinataire compte : listeComptesDestinataires)
+		for (CompteDestinataire compte : listeComptesDestinataires)
 			listeCompteDestinataireAChoisir.add(compte);
-		Object compteDestinataireChoisi = listeCompteDestinataireAChoisir.get(getChoixCompte(listeComptesDestinataires.size() + listeComptesPersosMoinsChoix.size()) - 1);
-	
+		Object compteDestinataireChoisi = listeCompteDestinataireAChoisir
+				.get(getChoixCompte(listeComptesDestinataires.size() + listeComptesPersosMoinsChoix.size()) - 1);
+
 		// TODO Recupere somme, date et message
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
+
 		Scanner input = new Scanner(System.in);
-		System.out.print("Somme : ");
-		String somme = input.next();
-		System.out.print("Date : ");
-		String date = input.next();
+		float somme = 0;
+		Date date = new Date();
+		try {
+			System.out.print("Somme : ");
+			somme = Float.parseFloat(input.next());
+			System.out.print("Date : ");
+			date = format.parse(input.next());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.print("Message : ");
 		String message = input.next();
-		
-		// test & trace
-		System.out.println("Trace test");
-		System.out.println("- 1 comptePersoChoisi -");
-		System.out.println(comptePersoChoisi.afficheCompte());
-		System.out.println("- 2 compteDestinataireChoisi -(" + compteDestinataireChoisi.getClass().toString() + ")");
-		if(compteDestinataireChoisi.getClass().toString().equals("class dab.Compte")) 
-			System.out.println(((Compte)compteDestinataireChoisi).afficheCompte());
+
+		if (banqueDeRattachement.effectueVirement(comptePersoChoisi, compteDestinataireChoisi, somme, date, message))
+			System.out.println("Virement effectué !");
 		else
-			System.out.println(((CompteDestinataire) compteDestinataireChoisi).afficheCompte());
-		System.out.println("- 3 - Somme : " + somme);
-		System.out.println("- 4 - Date : " + date);
-		System.out.println("- 5 - Message : " + message);
+			System.out.println("Erreur lors du virement.");
 	}
-	
+
 	private int getChoixCompte(int tailleListe) {
 		System.out.print("Tapez votre choix : ");
 		Scanner input = new Scanner(System.in);
@@ -155,29 +159,33 @@ public class Distrib {
 			System.out.print("Tapez votre choix entre " + 1 + " et " + tailleListe + " svp : ");
 			choix = input.nextInt();
 		}
-		
+
 		return choix;
 	}
 
 	private int[] obtenirIndiceComptesVirement() {
-		// System.out.println("Tapez deux numéros de compte séparés par des espaces (1-" + (listeComptesPerso.size() + 1) + ")  (" + (listeComptesPerso.size() + 2) + "-" + (listeComptesPerso.size() + listeComptesDestinataires.size() + 2));
+		// System.out.println("Tapez deux numéros de compte séparés par des espaces (1-"
+		// + (listeComptesPerso.size() + 1) + ") (" + (listeComptesPerso.size() + 2) +
+		// "-" + (listeComptesPerso.size() + listeComptesDestinataires.size() + 2));
 		Scanner input = new Scanner(System.in);
 		String inputString = input.nextLine();
 		String stringArray[] = inputString.split(" ");
 		int num[] = new int[stringArray.length];
 		for (int i = 0; i < stringArray.length; i++) {
 			num[i] = Integer.parseInt(stringArray[i]);
-			// System.out.println(num[i]);
 		}
 		return num;
 	}
-	
-	private Object[] obtenirInfoVirement(List<Compte> listeComptesPerso, List<CompteDestinataire> listeComptesDestinataires) {
+
+	private Object[] obtenirInfoVirement(List<Compte> listeComptesPerso,
+			List<CompteDestinataire> listeComptesDestinataires) {
 		Object info[] = new Object[5];
-		
+
 		Scanner input = new Scanner(System.in);
-		
-		System.out.println("Tapez deux numéros de compte séparés par des espaces (1-" + listeComptesPerso.size() + ")  (" + (listeComptesPerso.size() + 1) + "-" + (listeComptesPerso.size() + listeComptesDestinataires.size() + 2) + ") : ");
+
+		System.out.println("Tapez deux numéros de compte séparés par des espaces (1-" + listeComptesPerso.size()
+				+ ")  (" + (listeComptesPerso.size() + 1) + "-"
+				+ (listeComptesPerso.size() + listeComptesDestinataires.size() + 2) + ") : ");
 		System.out.println("indice compte perso | indice compte dest | somme | msg");
 		String inputString = input.nextLine();
 		String stringArray[] = inputString.split(" ");
@@ -202,18 +210,19 @@ public class Distrib {
 				break;
 			}
 		}
-		for(int i = 0; i < 5; i ++) {
-			System.out.println(" -> " + i + " => "+ info[i]);
+		for (int i = 0; i < 5; i++) {
+			System.out.println(" -> " + i + " => " + info[i]);
 		}
 		// info[0] = listeComptesPerso.get(num[0]);
 		// info[1] = listeComptesPerso.get(num[1]);
-		//System.out.println(num[0] + " - " + num[1]);
-		
-		//System.out.println("Tapez deux numéros de compte séparés par des espaces : ");
-		//Scanner input = new Scanner(System.in);
-		//inputString = input.nextLine();
+		// System.out.println(num[0] + " - " + num[1]);
+
+		// System.out.println("Tapez deux numéros de compte séparés par des espaces :
+		// ");
+		// Scanner input = new Scanner(System.in);
+		// inputString = input.nextLine();
 		return null;
-		
+
 	}
 
 	private void afficheListeComptesPersosVirement(List<Compte> listeComptesPerso) {
@@ -221,38 +230,36 @@ public class Distrib {
 			int indice = 1;
 			System.out.println("-------------------------------------------");
 			System.out.println("      ----Liste Comptes �metteurs----   ");
-			
+
 			for (Compte comptePerso : listeComptesPerso) {
 				System.out.print(" " + indice++ + ". ");
 				System.out.println(comptePerso.afficheCompteVirement());
 			}
-			
+
 			System.out.println("      -------------------------------   ");
-		} 
-		else
+		} else
 			System.out.println("Aucun compte n'a été trouvé."); // Ne devrait jamais se produire
 	}
-	
-	private void afficheListeComptesDestinatairesVirement(List<Compte> listeComptesPersos, List<CompteDestinataire> listeComptesDestinataires) {
+
+	private void afficheListeComptesDestinatairesVirement(List<Compte> listeComptesPersos,
+			List<CompteDestinataire> listeComptesDestinataires) {
 		if (listeComptesPersos.size() > 0 || listeComptesDestinataires.size() > 0) {
 			int indice = 1;
 			System.out.println("-------------------------------------------");
 			System.out.println("      ----Liste Comptes Destinataires----   ");
-			
-			
+
 			for (Compte compte : listeComptesPersos) {
 				System.out.print(" " + indice++ + ". ");
 				System.out.println(compte.afficheCompteVirement());
 			}
-			
+
 			for (CompteDestinataire compte : listeComptesDestinataires) {
 				System.out.print(" " + indice++ + ". ");
 				System.out.println(compte.afficheCompte());
 			}
-			
+
 			System.out.println("      -------------------------------   ");
-		} 
-		else
+		} else
 			System.out.println("Aucun compte n'a été trouvé."); // Ne devrait jamais se produire
 	}
 
@@ -290,7 +297,7 @@ public class Distrib {
 			System.out.print("Tapez votre choix entre " + min + " et " + max + " svp : ");
 			choix = input.nextInt();
 		}
-		
+
 		return choix;
 	}
 
