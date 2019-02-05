@@ -9,16 +9,18 @@ public class Banque {
 
 	private String nomBanque;
 	private String codeBanque;
-
-	public List<Banque> autresBanques = new ArrayList<>();
-
-	private List<Client> listeClients = new ArrayList<>();
-	private List<CarteClient> listeCartesClients = new ArrayList<>();
-	private List<Compte> ListCompte = new ArrayList<>();
+	private List<Banque> autresBanques;
+	private List<Client> listeClients;
+	private List<CarteClient> listeCartesClients;
+	private List<Compte> ListCompte;
 
 	public Banque(String nomBanque, String codeBanque) {
 		this.nomBanque = nomBanque;
 		this.codeBanque = codeBanque;
+		List<Banque> autresBanques = new ArrayList<>();
+		List<Client> listeClients = new ArrayList<>();
+		List<CarteClient> listeCartesClients = new ArrayList<>();
+		List<Compte> ListCompte = new ArrayList<>();
 	}
 
 	public boolean estUnClient(String noCarte) {
@@ -41,28 +43,30 @@ public class Banque {
 
 	public boolean effectueVirement(Compte compteEmission, Object compteDestinataire, float somme, Date date,
 			String message) {
-		if(compteEmission.verifierVirementPossible(somme)) {
-			
+		if (compteEmission.verifierVirementPossible(somme)) {
+
 			compteEmission.setSolde(-somme);
 			compteEmission.ajouteOperationBancaire(new OperationBancaire(NatureOperation.débit, -somme, date));
-			if(compteDestinataire instanceof Compte) {
+
+			if (compteDestinataire instanceof Compte) {
+
 				((Compte) compteDestinataire).setSolde(somme);
-				((Compte) compteDestinataire).ajouteOperationBancaire(new OperationBancaire(NatureOperation.crédit, somme, date));
-			}		
+				((Compte) compteDestinataire)
+						.ajouteOperationBancaire(new OperationBancaire(NatureOperation.crédit, somme, date));
+			}
 			return true;
-		}
-		else
+		} else
 			return false;
 	}
 
 	public List<Compte> recupereComptesConsultation(String numeroCarteInseree) {
 		for (CarteClient carteClient : listeCartesClients) {
 			if (carteClient.verifierNumeroCarte(numeroCarteInseree)) {
-				Client clientTrouve = carteClient.recupereClient(); // si on le trouve
-				return clientTrouve.recupereComptes(); // on revoie la liste des comptes
+				Client clientTrouve = carteClient.recupereClient();
+				return clientTrouve.recupereComptes();
 			}
 		}
-		return new ArrayList<>(); // sinon, on revoie une liste vide
+		return new ArrayList<>();
 	}
 
 	private void recupereComptesDestinataire() {

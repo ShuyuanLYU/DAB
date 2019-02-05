@@ -23,6 +23,6 @@ public class CarteClient {
     }
     // pour test
     public String toString() {
-    	return "NoCarte : " + numeroCarte + " client : " + client.getNomClient();
+    	return "NoCarte : " + numeroCarte + " Client : " + client.getNomClient();
     }
 }

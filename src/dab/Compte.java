@@ -28,12 +28,12 @@ public class Compte {
 	}
 
 	public String afficheCompte() {
-		return "  Numéro compte : " + numeroCompte + "\n" + "  solde : " + solde;
+		return "  Numéro compte : " + numeroCompte + "\n" + "  Solde : " + solde;
 	}
 
 	public String afficheDetailsCompte() {
-		return "  Numéro compte : " + numeroCompte + "\n" + "  solde : " + solde + "\n" + "  Plafond de retrait : "
-				+ plafondRetrait + "\n" + "  solde minimum : " + soldeMinimum + "\n" + afficheListeOB();
+		return "  Numéro compte : " + numeroCompte + "\n" + "  Solde : " + solde + "\n" + "  Plafond de retrait : "
+				+ plafondRetrait + "\n" + "  Solde minimum : " + soldeMinimum + "\n" + afficheListeOB();
 	}
 
 	public Compte recupereCompte() {
@@ -41,7 +41,7 @@ public class Compte {
 	}
 
 	public String afficheCompteVirement() {
-		return "Numéro compte : " + numeroCompte + "  solde : " + solde;
+		return "Numéro compte : " + numeroCompte + "  Solde : " + solde;
 	}
 
 	public boolean verifierVirementPossible(float somme) {

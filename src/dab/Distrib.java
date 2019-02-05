@@ -18,7 +18,8 @@ public class Distrib {
 	public Banque banqueDeRattachement;
 
 	private String numeroCarteInseree; // je pense on dois ignore cette classe ptetre
-
+	public Etat etat;
+	
 	public void insererCarte(String noCarte, String code, int nbEssaisRestants) {
 	}
 
@@ -37,8 +38,8 @@ public class Distrib {
 		if (listeComptes.size() > 0) {
 			afficheListeComptes(listeComptes);
 			afficheMenuDetailsCompte(listeComptes);
-			int choix = getChoixDetailsCompte(listeComptes.size());
-			traiteChoixDetailsCompte(listeComptes, choix);
+			selectionneCompte(listeComptes);
+			//traiteChoixDetailsCompte(listeComptes, choix);
 		}
 
 		else
@@ -54,22 +55,26 @@ public class Distrib {
 			System.out.println("       -Compte " + indice++ + "-");
 			System.out.println(compte.afficheCompte());
 		}
-
 		System.out.println("-------- Fin de liste ---------");
 
 	}
 
-	private int getChoixDetailsCompte(int tailleListe) {
+	private void selectionneCompte(List<Compte> listeComptes) {
 		System.out.print("Tapez votre choix : ");
 		Scanner input = new Scanner(System.in);
 		int choix = input.nextInt();
 
-		while (choix < 1 || choix > tailleListe + 1) {
-			System.out.print("Tapez votre choix entre " + 1 + " et " + (tailleListe + 1) + " svp : ");
+		while (choix < 1 || choix > listeComptes.size() + 1) {
+			System.out.print("Tapez votre choix entre " + 1 + " et " + (listeComptes.size() + 1) + " svp : ");
 			choix = input.nextInt();
 		}
-
-		return choix;
+		if (choix <= listeComptes.size()) {
+			System.out.println("------- Détails du compte ----------");
+			System.out.println(listeComptes.get(choix - 1).afficheDetailsCompte());
+			System.out.println("-------------------------------------");
+		}
+		
+		//return choix;
 	}
 
 	private void traiteChoixDetailsCompte(List<Compte> listeComptes, int choix) {
@@ -126,7 +131,7 @@ public class Distrib {
 		Object compteDestinataireChoisi = listeCompteDestinataireAChoisir
 				.get(getChoixCompte(listeComptesDestinataires.size() + listeComptesPersosMoinsChoix.size()) - 1);
 
-		// TODO Recupere somme, date et message
+		// TODO mettre dans une méthode
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
 
 		Scanner input = new Scanner(System.in);
@@ -272,14 +277,16 @@ public class Distrib {
 	public Distrib(Banque banqueDeRattachement, String numeroCarteInseree) {
 		this.banqueDeRattachement = banqueDeRattachement;
 		this.numeroCarteInseree = numeroCarteInseree;
+		etat = new E1AttenteOperation();
 	}
-
+	
 	public void afficheInit() {
 		System.out.println("Bienvenue au distribteur de " + banqueDeRattachement.getNomBanque());
 		System.out.println("Vous avez déjà passé l'Authentification d'identité");
 		System.out.println("Nous supposons donc que c'est la carte de Bob qui a été insérée.");
 	}
-
+	
+	
 	public void afficheMenu() {
 		System.out.println(" +-------------MENU----------------+");
 		System.out.println(" | 1. Consultation.                |");
@@ -287,6 +294,7 @@ public class Distrib {
 		System.out.println(" | 3. Retirer votre carte.(Quitter)|");
 		System.out.println(" +---------------------------------+");
 	}
+	
 
 	public static int getChoixMenu(int min, int max) {
 		System.out.print("Tapez votre choix : ");
@@ -335,5 +343,10 @@ public class Distrib {
 			System.out.println("Erreur...");
 			break;
 		}
+	}
+	
+	public void changeEtat(Etat nouvelEtat) throws Exception {
+		this.etat = nouvelEtat;
+		etat.traitement(this);
 	}
 }
