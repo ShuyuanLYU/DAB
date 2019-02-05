@@ -23,6 +23,9 @@ public class Distrib {
 	public List<Compte> listeComptes;
 	public int indiceChoixCompte;
 	
+	public List<CompteDestinataire> listeComptesDestinataires;
+	public Object[] listeInfoVirement;
+	
 	public void insererCarte(String noCarte, String code, int nbEssaisRestants) {
 	}
 
@@ -279,6 +282,7 @@ public class Distrib {
 		this.banqueDeRattachement = banqueDeRattachement;
 		this.numeroCarteInseree = numeroCarteInseree;
 		etat = new E1AttenteOperation();
+		listeInfoVirement = new Object[5]; 
 	}
 	
 	public void afficheInit() {
