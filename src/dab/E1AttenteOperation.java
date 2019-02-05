@@ -30,6 +30,8 @@ public class E1AttenteOperation extends Etat {
 		int choix = getChoixMenu(1, 3);
 
 		switch (choix) {
+		case 1:
+			distrib.changeEtat(new E3AttenteRecuperationComptesConsultation());
 		case 3:
 			distrib.changeEtat(new E2EtatFinal());
 			break;

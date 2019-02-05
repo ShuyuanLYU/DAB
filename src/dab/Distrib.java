@@ -20,7 +20,13 @@ public class Distrib {
 	private String numeroCarteInseree; // je pense on dois ignore cette classe ptetre
 	public Etat etat;
 	
+	public List<Compte> listeComptes;
+	
 	public void insererCarte(String noCarte, String code, int nbEssaisRestants) {
+	}
+	
+	public String getNumeroCarteInseree() {
+		return numeroCarteInseree;
 	}
 
 	public boolean saisirCode(int codeSaisi) {
