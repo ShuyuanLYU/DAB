@@ -41,3 +41,6 @@ artifacts/
 log/
 target/ 
 /bin/
+
+# VS Code
+.vscode/

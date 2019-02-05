@@ -17,16 +17,13 @@ public class Distrib {
 
 	public Banque banqueDeRattachement;
 
-	private String numeroCarteInseree; // je pense on dois ignore cette classe ptetre
+	public String numeroCarteInseree; // je pense on dois ignore cette classe ptetre
 	public Etat etat;
 	
 	public List<Compte> listeComptes;
+	public int indiceChoixCompte;
 	
 	public void insererCarte(String noCarte, String code, int nbEssaisRestants) {
-	}
-	
-	public String getNumeroCarteInseree() {
-		return numeroCarteInseree;
 	}
 
 	public boolean saisirCode(int codeSaisi) {
@@ -79,8 +76,6 @@ public class Distrib {
 			System.out.println(listeComptes.get(choix - 1).afficheDetailsCompte());
 			System.out.println("-------------------------------------");
 		}
-		
-		//return choix;
 	}
 
 	private void traiteChoixDetailsCompte(List<Compte> listeComptes, int choix) {
