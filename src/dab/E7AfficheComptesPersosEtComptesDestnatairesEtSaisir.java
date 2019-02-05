@@ -102,24 +102,21 @@ public class E7AfficheComptesPersosEtComptesDestnatairesEtSaisir extends Etat {
 		distrib.listeInfoVirement[2] = somme;
 		distrib.listeInfoVirement[3] = date;
 		distrib.listeInfoVirement[4] = message;
-		
-		System.out.println("TRACE : ");
-		System.out.println("1. compte perso : ");
-		System.out.println(comptePersoChoisi.afficheCompte());
-		System.out.println("2. compte destinataire : ");
-		if(comptePersoChoisi instanceof Compte)
-			System.out.println(((Compte) compteDestinataireChoisi).afficheCompte());
-		else
-			System.out.println(((CompteDestinataire) compteDestinataireChoisi).afficheCompte());
-		System.out.println("3. somme : " + somme);
-		System.out.println("4. Date : " + date.toString());
-		System.out.println("5. Message : " + message);
-		
-	
-		
-		
-		
-		distrib.changeEtat(new E1AttenteOperation());
+		/*
+		System.out.println("---------- TRACE ----------");
+		System.out.println("1. Compte perso : " + distrib.listeInfoVirement[0].getClass());
+		System.out.println(((Compte)distrib.listeInfoVirement[0]).afficheCompte());
+		System.out.println("2. Compte destinataire : " + distrib.listeInfoVirement[1].getClass());
+		if(distrib.listeInfoVirement[1] instanceof Compte)
+			System.out.println(((Compte) distrib.listeInfoVirement[1]).afficheCompte());
+		else if(distrib.listeInfoVirement[1] instanceof CompteDestinataire)
+			System.out.println(((CompteDestinataire) distrib.listeInfoVirement[1]).afficheCompte());
+		System.out.println("3. Somme : " + distrib.listeInfoVirement[2].getClass() + "\n" + distrib.listeInfoVirement[2]);
+		System.out.println("4. Date : " + distrib.listeInfoVirement[3].getClass() + "\n" + distrib.listeInfoVirement[3].toString());
+		System.out.println("5. Message : " + distrib.listeInfoVirement[4].getClass() + "\n" + distrib.listeInfoVirement[4]);
+		System.out.println("----------- END -----------");
+		*/
+		distrib.changeEtat(new E8AttenteVerificationVirement());
 		
 	}
 }
