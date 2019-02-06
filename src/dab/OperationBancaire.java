@@ -1,5 +1,6 @@
 package dab;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class OperationBancaire {
@@ -15,8 +16,9 @@ public class OperationBancaire {
     }
 
 	public String afficheOB() {
-		return "Nature Operation : " + nature + "\n" + "Montant : " + montant + "\n" + "Date Operation : "
-				+ dateOperation.toString() + "\n";
+		SimpleDateFormat dt = new SimpleDateFormat("dd-mm-yyyy");
+		return "  Nature Operation : " + nature + "\n" + "  Montant : " + montant + "\n" + "  Date Operation : "
+				+ dt.format(dateOperation) + "\n";
 	}
 
 }

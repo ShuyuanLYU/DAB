@@ -152,11 +152,12 @@ public class Distrib {
 		}
 		System.out.print("Message : ");
 		String message = input.next();
-
+		/*
 		if (banqueDeRattachement.effectueVirement(comptePersoChoisi, compteDestinataireChoisi, somme, date, message))
 			System.out.println("Virement effectué !");
 		else
 			System.out.println("Erreur lors du virement.");
+		*/
 	}
 
 	private int getChoixCompte(int tailleListe) {

@@ -5,11 +5,11 @@ import java.util.Scanner;
 public class E1AttenteOperation extends Etat {
 
     public void afficheMenu() {
-        System.out.println(" +-------------MENU----------------+");
-        System.out.println(" | 1. Consultation.                |");
-        System.out.println(" | 2. Virement.                    |");
-        System.out.println(" | 3. Retirer votre carte.(Quitter)|");
-        System.out.println(" +---------------------------------+");
+        System.out.println(" +-------------MENU-----------------+");
+        System.out.println(" | 1. Consultation.                 |");
+        System.out.println(" | 2. Virement.                     |");
+        System.out.println(" | 3. Retirer votre carte.(Quitter) |");
+        System.out.println(" +----------------------------------+");
     }
 
     public static int getChoixMenu(int min, int max) {

@@ -57,13 +57,14 @@ public class Compte {
 	}
 
 	public String afficheListeOB() {
-		String contenu = "----Liste Opérations Bancaires----\n";
+		String contenu = "   - - - Liste Opérations Bancaires - - -\n";
 		if (listeOB.size() > 0)
 			for (int i = 0; i < listeOB.size(); i++)
-				contenu += (i + 1) + ". " + listeOB.get(i).afficheOB();
+				contenu += "                -" + (i + 1) + "-\n" + listeOB.get(i).afficheOB();
+		//System.out.println("       -Compte " + indice++ + "-");
 		else
-			contenu += "Il n'y a d'opérations bancaires enregistrées.\n";
-		contenu += "----------------------------------";
+			contenu += " Il n'y a d'opérations bancaires enregistrées.\n";
+		contenu += "   - - - - - - - - - - - - - - - - - -";
 		return contenu;
 	}
 

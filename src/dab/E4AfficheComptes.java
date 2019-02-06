@@ -6,15 +6,15 @@ import java.util.Scanner;
 public class E4AfficheComptes extends Etat {
 
     private void afficheListeComptes(List<Compte> listeComptes) {
-        System.out.println("----- Liste des comptes -----");
+        System.out.println("- - - - Liste des comptes - - - -");
 
         int indice = 1;
 
         for (Compte compte : listeComptes) {
-            System.out.println("       -Compte " + indice++ + "-");
+            System.out.println("         -Compte " + indice++ + "-");
             System.out.println(compte.afficheCompte());
         }
-        System.out.println("-------- Fin de liste ---------");
+        System.out.println("- - - - - Fin de liste - - - - -");
 
     }
 
@@ -26,7 +26,7 @@ public class E4AfficheComptes extends Etat {
         }
 
         System.out.println(" " + indice + ". Retour au menu");
-        System.out.println("-----------------------");
+        System.out.println("--------------------------------");
     }
 
     private int selectionneCompte(List<Compte> listeComptes) {

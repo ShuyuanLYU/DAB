@@ -44,7 +44,7 @@ public class E7AfficheComptesPersosEtComptesDestnatairesEtSaisir extends Etat {
 			List<CompteDestinataire> listeComptesDestinataires) {
 		if (listeComptesPersos.size() > 0 || listeComptesDestinataires.size() > 0) {
 			int indice = 1;
-			System.out.println("-------------------------------------------");
+			
 			System.out.println("      ----Liste Comptes Destinataires----   ");
 
 			for (Compte compte : listeComptesPersos) {
@@ -58,6 +58,7 @@ public class E7AfficheComptesPersosEtComptesDestnatairesEtSaisir extends Etat {
 			}
 
 			System.out.println("      -------------------------------   ");
+			System.out.println("-------------------------------------------");
 		} else
 			System.out.println("Aucun compte n'a été trouvé."); // Ne devrait jamais se produire
 	}

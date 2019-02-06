@@ -41,22 +41,26 @@ public class Banque {
 		return new Object[2];
 	}
 
-	public boolean effectueVirement(Compte compteEmission, Object compteDestinataire, float somme, Date date,
+	public void effectueVirement(Compte compteEmission, Object compteDestinataire, float somme, Date date,
 			String message) {
-		if (compteEmission.verifierVirementPossible(somme)) {
+		// if (compteEmission.verifierVirementPossible(somme)) {
+		compteEmission.setSolde(-somme);
+		compteEmission.ajouteOperationBancaire(new OperationBancaire(NatureOperation.débit, -somme, date));
 
-			compteEmission.setSolde(-somme);
-			compteEmission.ajouteOperationBancaire(new OperationBancaire(NatureOperation.débit, -somme, date));
+		if (compteDestinataire instanceof Compte) {
 
-			if (compteDestinataire instanceof Compte) {
+			((Compte) compteDestinataire).setSolde(somme);
+			((Compte) compteDestinataire)
+					.ajouteOperationBancaire(new OperationBancaire(NatureOperation.crédit, somme, date));
+		}
+		// return true;
+		// } else
+		// return false;
+	}
 
-				((Compte) compteDestinataire).setSolde(somme);
-				((Compte) compteDestinataire)
-						.ajouteOperationBancaire(new OperationBancaire(NatureOperation.crédit, somme, date));
-			}
-			return true;
-		} else
-			return false;
+	public boolean verifierVirement(Compte compteEmission, Object compteDestinataire, float somme, Date date,
+			String message) {
+		return compteEmission.verifierVirementPossible(somme);
 	}
 
 	public List<Compte> recupereComptesConsultation(String numeroCarteInseree) {
