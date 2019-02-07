@@ -16,7 +16,7 @@ public class OperationBancaire {
     }
 
 	public String afficheOB() {
-		SimpleDateFormat dt = new SimpleDateFormat("dd-mm-yyyy");
+		SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy");
 		return "  Nature Operation : " + nature + "\n" + "  Montant : " + montant + "\n" + "  Date Operation : "
 				+ dt.format(dateOperation) + "\n";
 	}

@@ -30,7 +30,7 @@ public class E6AttenteRecuperationComptesVirement extends Etat {
     	
     	//afficheListeComptesPersosVirement(distrib);
     	
-    	distrib.changeEtat(new E7AfficheComptesPersosEtComptesDestnatairesEtSaisir());
+    	distrib.changeEtat(new E7AfficheComptesPersosEtDestinataires());
 		
     	
     }

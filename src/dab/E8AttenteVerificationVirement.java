@@ -31,7 +31,7 @@ public class E8AttenteVerificationVirement extends Etat {
 			distrib.changeEtat(new E9VirementEffectue());
 		else {
 			verificationechoue();
-			distrib.changeEtat(new E7AfficheComptesPersosEtComptesDestnatairesEtSaisir());
+			distrib.changeEtat(new E7AfficheComptesPersosEtDestinataires());
 		}
 			
 	}

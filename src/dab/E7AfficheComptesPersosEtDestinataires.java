@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class E7AfficheComptesPersosEtComptesDestnatairesEtSaisir extends Etat {
+public class E7AfficheComptesPersosEtDestinataires extends Etat {
 	
 	private void afficheListeComptesPersosVirement(Distrib distrib) {
 		if (distrib.listeComptes.size() > 0) {
