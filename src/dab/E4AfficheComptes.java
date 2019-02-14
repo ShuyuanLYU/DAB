@@ -16,7 +16,6 @@ public class E4AfficheComptes extends Etat {
         }
 
         System.out.println("- - - - - Fin de liste - - - - -");
-
     }
 
     private void afficheMenuDetailsCompte(List<Compte> listeComptes) {

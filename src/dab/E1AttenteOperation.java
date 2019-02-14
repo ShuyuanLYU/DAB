@@ -43,6 +43,5 @@ public class E1AttenteOperation extends Etat {
                 this.traitement(distrib);
                 break;
         }
-
     }
 }

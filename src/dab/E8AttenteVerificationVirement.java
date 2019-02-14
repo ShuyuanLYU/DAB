@@ -6,8 +6,8 @@ public class E8AttenteVerificationVirement extends Etat {
 	
 	public void verificationechoue() {
 		System.out.println("+---------------------+");
-		System.out.println("|Virification échoué !|");
-		System.out.println("|   Rechoissiez svp   |");
+		System.out.println("|Vérification échouée !|");
+		System.out.println("| Veuillez recommencer |");
 		System.out.println("+---------------------+");
 	}
 	
