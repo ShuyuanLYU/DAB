@@ -9,26 +9,16 @@ public class Banque {
 
 	private String nomBanque;
 	private String codeBanque;
-	private List<Banque> autresBanques;
 	private List<Client> listeClients;
 	private List<CarteClient> listeCartesClients;
-	private List<Compte> ListCompte;
+	private List<Compte> listeCompte;
 
 	public Banque(String nomBanque, String codeBanque) {
 		this.nomBanque = nomBanque;
 		this.codeBanque = codeBanque;
-		List<Banque> autresBanques = new ArrayList<>();
-		List<Client> listeClients = new ArrayList<>();
-		List<CarteClient> listeCartesClients = new ArrayList<>();
-		List<Compte> ListCompte = new ArrayList<>();
-	}
-
-	public boolean estUnClient(String noCarte) {
-		return noCarte.startsWith(codeBanque);
-	}
-
-	private List<Compte> recupereComptes(String noCarte) {
-		return null;
+		listeClients = new ArrayList<>();
+		listeCartesClients = new ArrayList<>();
+		listeCompte = new ArrayList<>();
 	}
 
 	public Object[] recupereComptesVirement(String numeroCarteInseree) {
@@ -41,25 +31,20 @@ public class Banque {
 		return new Object[2];
 	}
 
-	public void effectueVirement(Compte compteEmission, Object compteDestinataire, float somme, Date date,
+	public void effectuerVirement(Compte compteEmission, Object compteDestinataire, float somme, Date date,
 			String message) {
-		// if (compteEmission.verifierVirementPossible(somme)) {
 		compteEmission.setSolde(-somme);
-		compteEmission.ajouteOperationBancaire(new OperationBancaire(NatureOperation.débit, -somme, date));
+		compteEmission.ajouteOperationBancaire(new OperationBancaire(NatureOperation.debit, -somme, date, message));
 
 		if (compteDestinataire instanceof Compte) {
 
 			((Compte) compteDestinataire).setSolde(somme);
 			((Compte) compteDestinataire)
-					.ajouteOperationBancaire(new OperationBancaire(NatureOperation.crédit, somme, date));
+					.ajouteOperationBancaire(new OperationBancaire(NatureOperation.credit, somme, date, message));
 		}
-		// return true;
-		// } else
-		// return false;
 	}
 
-	public boolean verifierVirement(Compte compteEmission, Object compteDestinataire, float somme, Date date,
-			String message) {
+	public boolean verifierVirement(Compte compteEmission, float somme) {
 		return compteEmission.verifierVirementPossible(somme);
 	}
 
@@ -73,38 +58,17 @@ public class Banque {
 		return new ArrayList<>();
 	}
 
-	private void recupereComptesDestinataire() {
-		// TO DO
-	}
-
-	// ---------------------------------------------- méthodes créées manuelles
-	public String getNomBanque() {
-		return nomBanque;
-	}
-
-	// pour test
-	public void afficheListClient() {
-		System.out.println("size of ListClient: " + listeClients.size());
-
-		for (Client tmp : listeClients) {
-			System.out.println(tmp.toString());
-		}
-	}
-
-	// pour init Banque
 	public void ajouteClient(Client c) {
 		if (listeClients == null)
-			listeClients = new ArrayList<Client>();
+			listeClients = new ArrayList<>();
 
 		listeClients.add(c);
 	}
 
-	// pour init Banque
 	public void ajouteCarteClient(CarteClient cc) {
 		if (listeCartesClients == null)
-			listeCartesClients = new ArrayList<CarteClient>();
+			listeCartesClients = new ArrayList<>();
 
 		listeCartesClients.add(cc);
 	}
-
 }

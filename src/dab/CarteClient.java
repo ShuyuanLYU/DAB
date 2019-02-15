@@ -9,10 +9,6 @@ public class CarteClient {
     	this.numeroCarte = numeroCarte;
     	this.client = client;
     }
-    
-    public String getNumeroCarte() {
-    	return numeroCarte;
-    }
 
     public boolean verifierNumeroCarte(String numeroCarte) {
         return this.numeroCarte.equals(numeroCarte);
@@ -20,9 +16,5 @@ public class CarteClient {
 
     public Client recupereClient() {
         return client;
-    }
-    // pour test
-    public String toString() {
-    	return "NoCarte : " + numeroCarte + " Client : " + client.getNomClient();
     }
 }

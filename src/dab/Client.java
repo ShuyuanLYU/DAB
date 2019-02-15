@@ -9,9 +9,6 @@ public class Client {
 	private List<Compte> listeComptes;
 	private List<CompteDestinataire> listeComptesDestinataires;
 
-	public String getNomClient() {
-		return nomClient;
-	}
 	
 	public Client(String nomClient, List<Compte> listeComptes, List<CompteDestinataire> compteDestinataires) {
 		this.nomClient = nomClient;
@@ -32,15 +29,7 @@ public class Client {
 
 		if(listeComptesDestinataires == null)
 			listeComptesDestinataires = new ArrayList<>();
-		
-		Object[] comptesAssocies = {listeComptes, listeComptesDestinataires};
-		return comptesAssocies;
-	}
 
-	// ---- pour test
-	public String toString() {
-		return "Client " + nomClient;
-		// + " possède " + ListCompte.size() + "ListCompte.";
+		return new Object[]{listeComptes, listeComptesDestinataires};
 	}
-
 }

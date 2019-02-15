@@ -1,8 +1,6 @@
 package dab;
 
-import java.util.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Compte {
@@ -11,7 +9,7 @@ public class Compte {
     private String numeroCompte;
     private float plafondRetrait;
     private float soldeMinimum;
-    private List<Client> client;
+    private List<Client> clients;
     private List<OperationBancaire> listeOB;
 
     public String getNumeroCompte() {
@@ -23,7 +21,7 @@ public class Compte {
         this.numeroCompte = numeroCompte;
         this.plafondRetrait = plafondRetrait;
         this.soldeMinimum = soldeMinimum;
-        client = new ArrayList<>();
+        clients = new ArrayList<>();
         listeOB = new ArrayList<>();
     }
 
@@ -34,10 +32,6 @@ public class Compte {
     public String afficheDetailsCompte() {
         return "  Numéro compte : " + numeroCompte + "\n" + "  Solde : " + solde + "\n" + "  Plafond de retrait : "
                 + plafondRetrait + "\n" + "  Solde minimum : " + soldeMinimum + "\n" + afficheListeOB();
-    }
-
-    public Compte recupereCompte() {
-        return this;
     }
 
     public String afficheCompteVirement() {
@@ -57,14 +51,16 @@ public class Compte {
     }
 
     public String afficheListeOB() {
-        String contenu = "   - - - Liste Opérations Bancaires - - -\n";
+        StringBuilder contenu = new StringBuilder("   - - - Liste Opérations Bancaires - - -\n");
+
         if (listeOB.size() > 0)
             for (int i = 0; i < listeOB.size(); i++)
-                contenu += "                -" + (i + 1) + "-\n" + listeOB.get(i).afficheOB();
+                contenu.append("                -").append(i + 1).append("-\n").append(listeOB.get(i).afficheOB());
         else
-            contenu += " Il n'y a d'opérations bancaires enregistrées.\n";
-        contenu += "   - - - - - - - - - - - - - - - - - - - -";
-        return contenu;
+            contenu.append(" Il n'y a d'opérations bancaires enregistrées.\n");
+        contenu.append("   - - - - - - - - - - - - - - - - - - - -");
+
+        return contenu.toString();
     }
 
 }

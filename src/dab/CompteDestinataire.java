@@ -9,10 +9,6 @@ public class CompteDestinataire {
     	this.iban = iban;
     	this.bic = bic;
     }
-    
-    public CompteDestinataire recupereCompte() {
-    	return this;
-    }
 
     public String afficheCompte() {
         return "Iban : " + iban + "  BIC : " + bic;

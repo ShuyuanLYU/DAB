@@ -21,7 +21,6 @@ public class Main {
 		Distrib distrib = new Distrib(initBanque(listeClientsCA, listeCartesClients), "0123456789");
 
 		// Lance l'interface du distributeur
-		//distrib.lanceDistributeur();
 		try {
 			distrib.etat.traitement(distrib);
 		} catch (Exception e) {
