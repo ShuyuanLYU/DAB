@@ -5,13 +5,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
 import java.util.Locale;
 import java.util.Scanner;
 
 public class E7AfficheComptesPersosEtDestinataires extends Etat {
 
-    private void afficheListeComptesPersosVirement(List<Compte> listeComptes) {
+    private void afficheListeComptesPersosVirement(ArrayList<Compte> listeComptes) {
         if (listeComptes.size() > 0) {
             int indice = 1;
             System.out.println("-------------------------------------------");
@@ -21,7 +21,6 @@ public class E7AfficheComptesPersosEtDestinataires extends Etat {
                 System.out.print(" " + indice++ + ". ");
                 System.out.println(comptePerso.afficheCompteVirement());
             }
-
             System.out.println("      -------------------------------   ");
         } else
             System.out.println("Aucun compte n'a été trouvé."); // Ne devrait jamais se produire
@@ -40,8 +39,8 @@ public class E7AfficheComptesPersosEtDestinataires extends Etat {
         return choix;
     }
 
-    private void afficheListeComptesDestinatairesVirement(List<Compte> listeComptesPersos,
-                                                          List<CompteDestinataire> listeComptesDestinataires) {
+    private void afficheListeComptesDestinatairesVirement(ArrayList<Compte> listeComptesPersos,
+                                                          ArrayList<CompteDestinataire> listeComptesDestinataires) {
         if (listeComptesPersos.size() > 0 || listeComptesDestinataires.size() > 0) {
             int indice = 1;
 
@@ -69,7 +68,7 @@ public class E7AfficheComptesPersosEtDestinataires extends Etat {
         int indiceComptePersoChoisi = getChoixCompte(distrib.listeComptes.size()) - 1;
         Compte comptePersoChoisi = distrib.listeComptes.get(indiceComptePersoChoisi);
 
-        List<Compte> listeComptesPersosMoinsChoix = new ArrayList<>(distrib.listeComptes);
+        ArrayList<Compte> listeComptesPersosMoinsChoix = new ArrayList<>(distrib.listeComptes);
         listeComptesPersosMoinsChoix.remove(indiceComptePersoChoisi);
         afficheListeComptesDestinatairesVirement(listeComptesPersosMoinsChoix, distrib.listeComptesDestinataires);
 

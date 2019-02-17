@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -20,10 +20,10 @@ public class Distrib {
 	public String numeroCarteInseree;
 	public Etat etat;
 	
-	public List<Compte> listeComptes;
+	public ArrayList<Compte> listeComptes;
 	public int indiceChoixCompte;
 	
-	public List<CompteDestinataire> listeComptesDestinataires;
+	public ArrayList<CompteDestinataire> listeComptesDestinataires;
 	public Object[] listeInfoVirement;
 
 	public Distrib(Banque banqueDeRattachement, String numeroCarteInseree) {

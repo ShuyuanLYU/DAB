@@ -1,6 +1,7 @@
 package dab;
 
-import java.util.List;
+import java.util.ArrayList;
+
 
 public class E6AttenteRecuperationComptesVirement extends Etat {
 	
@@ -8,8 +9,8 @@ public class E6AttenteRecuperationComptesVirement extends Etat {
 
     	Object[] listeComptes = distrib.banqueDeRattachement.recupereComptesVirement(distrib.numeroCarteInseree);
     	
-    	distrib.listeComptes = (List<Compte>) listeComptes[0];
-    	distrib.listeComptesDestinataires = (List<CompteDestinataire>) listeComptes[1];
+    	distrib.listeComptes = (ArrayList<Compte>) listeComptes[0];
+    	distrib.listeComptesDestinataires = (ArrayList<CompteDestinataire>) listeComptes[1];
     	
     	distrib.changeEtat(new E7AfficheComptesPersosEtDestinataires());
     }

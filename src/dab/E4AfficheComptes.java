@@ -1,11 +1,12 @@
 package dab;
 
-import java.util.List;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class E4AfficheComptes extends Etat {
 
-    private void afficheListeComptes(List<Compte> listeComptes) {
+    private void afficheListeComptes(ArrayList<Compte> listeComptes) {
         int indice = 1;
 
         System.out.println("- - - - Liste des comptes - - - -");
@@ -18,25 +19,26 @@ public class E4AfficheComptes extends Etat {
         System.out.println("- - - - - Fin de liste - - - - -");
     }
 
-    private void afficheMenuDetailsCompte(List<Compte> listeComptes) {
+    private void afficheMenuDetailsCompte(ArrayList<Compte> listeComptes) {
         int indice = 1;
 
         for (Compte compte : listeComptes) {
             System.out.println(" " + indice++ + ". Voir détails de : " + compte.getNumeroCompte());
         }
 
-        System.out.println(" " + indice + ". Retour au menu");
+        System.out.println(" " + indice++ + ". Retour au menu");
+        System.out.println(" " + indice + ". Quitter");
         System.out.println("--------------------------------");
     }
 
-    private int selectionneCompte(List<Compte> listeComptes) {
+    private int selectionneCompte(ArrayList<Compte> listeComptes) {
         System.out.print("Tapez votre choix : ");
 
         Scanner input = new Scanner(System.in);
         int choix = input.nextInt();
 
-        while (choix < 1 || choix > listeComptes.size() + 1) {
-            System.out.print("Tapez votre choix entre " + 1 + " et " + (listeComptes.size() + 1) + " svp : ");
+        while (choix < 1 || choix > listeComptes.size() + 2) {
+            System.out.print("Tapez votre choix entre " + 1 + " et " + (listeComptes.size() + 2) + " svp : ");
             choix = input.nextInt();
         }
 
@@ -52,6 +54,8 @@ public class E4AfficheComptes extends Etat {
 
         if (choix == distrib.listeComptes.size() + 1)
             distrib.changeEtat(new E1AttenteOperation());
+        else if(choix == distrib.listeComptes.size() + 2)
+            distrib.changeEtat(new E2EtatFinal());
         else {
             distrib.indiceChoixCompte = choix - 1;
             distrib.changeEtat(new E5AfficheDetailsCompte());

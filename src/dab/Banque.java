@@ -3,15 +3,15 @@ package dab;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
+
 
 public class Banque {
 
 	private String nomBanque;
 	private String codeBanque;
-	private List<Client> listeClients;
-	private List<CarteClient> listeCartesClients;
-	private List<Compte> listeCompte;
+	private ArrayList<Client> listeClients;
+	private ArrayList<CarteClient> listeCartesClients;
+	private ArrayList<Compte> listeCompte;
 
 	public Banque(String nomBanque, String codeBanque) {
 		this.nomBanque = nomBanque;
@@ -48,7 +48,7 @@ public class Banque {
 		return compteEmission.verifierVirementPossible(somme);
 	}
 
-	public List<Compte> recupereComptesConsultation(String numeroCarteInseree) {
+	public ArrayList<Compte> recupereComptesConsultation(String numeroCarteInseree) {
 		for (CarteClient carteClient : listeCartesClients) {
 			if (carteClient.verifierNumeroCarte(numeroCarteInseree)) {
 				Client clientTrouve = carteClient.recupereClient();

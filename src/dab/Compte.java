@@ -1,7 +1,7 @@
 package dab;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class Compte {
 
@@ -9,8 +9,8 @@ public class Compte {
     private String numeroCompte;
     private float plafondRetrait;
     private float soldeMinimum;
-    private List<Client> clients;
-    private List<OperationBancaire> listeOB;
+    private ArrayList<Client> clients;
+    private ArrayList<OperationBancaire> listeOB;
 
     public String getNumeroCompte() {
         return numeroCompte;
@@ -44,6 +44,10 @@ public class Compte {
 
     public void setSolde(float somme) {
         solde += somme;
+    }
+
+    public float getSolde() {
+        return solde;
     }
 
     public void ajouteOperationBancaire(OperationBancaire nouvelleOB) {
