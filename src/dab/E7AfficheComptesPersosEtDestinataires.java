@@ -77,8 +77,7 @@ public class E7AfficheComptesPersosEtDestinataires extends Etat {
 
         Object compteDestinataireChoisi = listeCompteDestinataireAChoisir
                 .get(getChoixCompte(distrib.listeComptesDestinataires.size() + listeComptesPersosMoinsChoix.size()) - 1);
-
-        // TODO mettre dans une méthode
+        
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.FRENCH);
 
         Scanner input = new Scanner(System.in);
@@ -91,8 +90,7 @@ public class E7AfficheComptesPersosEtDestinataires extends Etat {
             somme = Float.parseFloat(input.next());
             System.out.print("Date : ");
             date = format.parse(input.next());
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 

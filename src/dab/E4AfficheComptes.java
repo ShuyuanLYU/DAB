@@ -54,7 +54,7 @@ public class E4AfficheComptes extends Etat {
 
         if (choix == distrib.listeComptes.size() + 1)
             distrib.changeEtat(new E1AttenteOperation());
-        else if(choix == distrib.listeComptes.size() + 2)
+        else if (choix == distrib.listeComptes.size() + 2)
             distrib.changeEtat(new E2EtatFinal());
         else {
             distrib.indiceChoixCompte = choix - 1;

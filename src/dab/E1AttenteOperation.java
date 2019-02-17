@@ -34,7 +34,7 @@ public class E1AttenteOperation extends Etat {
                 distrib.changeEtat(new E3AttenteRecuperationComptesConsultation());
                 break;
             case 2:
-				distrib.changeEtat(new E6AttenteRecuperationComptesVirement());
+                distrib.changeEtat(new E6AttenteRecuperationComptesVirement());
                 break;
             case 3:
                 distrib.changeEtat(new E2EtatFinal());

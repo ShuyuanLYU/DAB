@@ -32,13 +32,11 @@ public class E8AttenteVerificationVirement extends Etat {
                 afficheVirementEffectue();
 
                 distrib.changeEtat(new E1AttenteOperation());
-            }
-            else {
+            } else {
                 afficheVerificationEchoue();
                 distrib.changeEtat(new E7AfficheComptesPersosEtDestinataires());
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
